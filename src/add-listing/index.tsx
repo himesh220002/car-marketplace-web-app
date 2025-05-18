@@ -104,7 +104,6 @@ function AddListing() {
     const handleInputChange = (name: string, value: string | number | boolean) => {
         setFormData((prevData) => {
             const updatedData = { ...prevData, [name]: value };
-            //console.log("Updated form data:", updatedData);  ✅ Real-time update
             return updatedData;
         })
 
@@ -118,7 +117,6 @@ function AddListing() {
     const handleFeatureChange = (name: string, value: boolean) => {
         setFeaturesData((prevData) => {
             const updatedData = { ...prevData, [name]: value };
-            // console.log("update from handlfeature",updatedData);
             return updatedData;
         })
     }
@@ -126,28 +124,11 @@ function AddListing() {
 
 
 
-    // const onSubmit = async(e)=>{
-    //     e.preventDefault();
-    //     console.log(formData);
-
-    //     try{
-    //     const result= await db.insert(CarListing).values(formData);
-
-    //         if(result){
-    //             console.log("Data Saved");
-    //         }
-    //     }catch{
-    //         console.log("Error",e);
-    //     }
-    // }
     const onSubmit = async (e: FormEvent) => {
         setLoader(true);
         e.preventDefault();
 
 
-        //console.log("🧾 Insert Keys:", Object.keys(formData));  ✅
-
-        // Get required fields
         const requiredFields = carDetails.CarDetails
             .filter((field: any) => field.required)
             .map((field: any) => field.name);
@@ -242,7 +223,7 @@ function AddListing() {
                                             {item.required && <span className='text-red-500'>*</span>}
                                         </label>
 
-                                        {item.fieldType == "text" || item.fieldType == 'number'
+                                        {item.fieldType === "text" || item.fieldType == 'number'
                                             ? <InputField item={item} handleInputChange={handleInputChange} carInfo={carInfo} />
                                             : item.fieldType == "dropdown" ? <DropdownField item={item} handleInputChange={handleInputChange} carInfo={carInfo} />
                                             : item.fieldType == "textarea" ? 
@@ -263,7 +244,7 @@ function AddListing() {
                         <div>
                             <h2 className='font-medium text-xl my-6'>Features</h2>
                             <div className='grid grid-cols-2 md:grid-cols-3 gap-2'>
-                                {features.features.map((item, index) => (
+                                {features?.features?.map((item, index) => (
                                     <div key={index} className='flex gap-2 items-center'>
                                         <Checkbox
                                             checked={featuresData?.[item.name]}
@@ -316,7 +297,7 @@ function AddListing() {
         )
     } catch (error) {
         console.error("UI Render Error:", error);
-        return <div>Error rendering form</div>;
+        return <div className='text-red-600 font-bold'>🚨 Something went wrong!</div>;
     }
 }
 
