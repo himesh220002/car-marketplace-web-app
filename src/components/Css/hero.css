@@ -1,0 +1,37 @@
+@keyframes carSlide {
+    0% {
+      left: 0%;
+      opacity: 0;
+      width: 0px;
+    }
+    5% {
+      opacity: 1; /* Fade in near entry */
+      width: 40px;
+    }
+    
+    10%{
+        width: 40px;
+    }
+    90% {
+      opacity: 1; /* Stay visible */
+      width: 40px;
+    }
+    95%{
+        opacity: 1;
+    }
+    100% {
+      left: 98%;
+      opacity: 0; /* Fade out near exit */
+      width: 10px;
+    }
+  }
+  
+  .car-slide {
+    animation: carSlide 120s linear infinite;
+    position: absolute;
+    bottom: 0px;
+    width: 80px;
+    z-index: 50;
+    pointer-events: none;
+  }
+  

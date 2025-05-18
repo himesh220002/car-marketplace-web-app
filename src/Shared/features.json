@@ -1,0 +1,42 @@
+{
+    "features": 
+    [
+        { "label": "Air Conditioner", "name": "airConditioner", "fieldType": "checkbox" },
+  { "label": "Digital Odometer", "name": "digitalOdometer", "fieldType": "checkbox" },
+  { "label": "Heater", "name": "heater", "fieldType": "checkbox" },
+  { "label": "Leather Seats", "name": "leatherSeats", "fieldType": "checkbox" },
+  { "label": "Power Steering", "name": "powerSteering", "fieldType": "checkbox" },
+  { "label": "Power Windows", "name": "powerWindows", "fieldType": "checkbox" },
+  { "label": "ABS (Anti-lock Braking System)", "name": "abs", "fieldType": "checkbox" },
+  { "label": "Airbags", "name": "airbags", "fieldType": "checkbox" },
+  { "label": "Parking Sensors", "name": "parkingSensors", "fieldType": "checkbox" },
+  { "label": "Rear Camera", "name": "rearCamera", "fieldType": "checkbox" },
+  { "label": "Navigation System", "name": "navigationSystem", "fieldType": "checkbox" },
+  { "label": "Bluetooth", "name": "bluetooth", "fieldType": "checkbox" },
+  { "label": "Cruise Control", "name": "cruiseControl", "fieldType": "checkbox" },
+  { "label": "Panaromic Sunroof", "name": "panaromicSunroof", "fieldType": "checkbox" },
+  { "label": "Alloy Wheels", "name": "alloyWheels", "fieldType": "checkbox" },
+  { "label": "Fog Lights", "name": "fogLights", "fieldType": "checkbox" },
+  { "label": "Keyless Entry", "name": "keylessEntry", "fieldType": "checkbox" },
+  { "label": "Remote Start", "name": "remoteStart", "fieldType": "checkbox" },
+  { "label": "Touchscreen Display", "name": "touchscreenDisplay", "fieldType": "checkbox" },
+  { "label": "Voice Control", "name": "voiceControl", "fieldType": "checkbox" },
+  { "label": "Tachometer", "name": "tachometer", "fieldType": "checkbox" },
+
+  { "label": "ADAS (Advanced Driver-Assistance Systems)", "name": "adas", "fieldType": "checkbox" },
+  { "label": "Blind Spot Monitoring", "name": "blindSpotMonitoring", "fieldType": "checkbox" },
+  { "label": "Lane Keep Assist", "name": "laneKeepAssist", "fieldType": "checkbox" },
+  { "label": "Adaptive Cruise Control", "name": "adaptiveCruiseControl", "fieldType": "checkbox" },
+  { "label": "Auto Emergency Braking", "name": "autoEmergencyBraking", "fieldType": "checkbox" },
+  { "label": "Forward Collision Warning", "name": "forwardCollisionWarning", "fieldType": "checkbox" },
+  { "label": "Traffic Sign Recognition", "name": "trafficSignRecognition", "fieldType": "checkbox" },
+  { "label": "Driver Drowsiness Detection", "name": "driverDrowsinessDetection", "fieldType": "checkbox" },
+  { "label": "360 Degree Camera", "name": "camera360", "fieldType": "checkbox" },
+  { "label": "Heads-Up Display", "name": "headsUpDisplay", "fieldType": "checkbox" },
+  { "label": "Wireless Charging", "name": "wirelessCharging", "fieldType": "checkbox" },
+  { "label": "Android Auto / Apple CarPlay", "name": "smartphoneIntegration", "fieldType": "checkbox" },
+  { "label": "Tyre Pressure Monitoring System (TPMS)", "name": "tpms", "fieldType": "checkbox" },
+  { "label": "Self Parking Assist", "name": "parkingAssist", "fieldType": "checkbox" }
+    ]   
+
+}

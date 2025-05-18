@@ -1,0 +1,31 @@
+.hoverUnderLine ul li {
+    list-style: none;
+  }
+  
+  .hoverUnderLine ul li a {
+    text-decoration: none;
+    position: relative;
+  }
+  
+  /* Default underline effect */
+  .hoverUnderLine ul li a::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #d95623;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+  }
+  
+  /* Hover underline effect */
+  .hoverUnderLine ul li a:hover::after {
+    width: 100%;
+  }
+  
+  /* Active underline effect */
+  .hoverUnderLine ul li a.active::after {
+    width: 100%;
+  }
+  

@@ -1,0 +1,212 @@
+{
+    "CarDetails": [
+      {
+        "label": "Listing Title",
+        "name": "listingTitle",
+        "fieldType": "text",
+        "required": true,
+        "column": 2,
+        "icon": "FaClipboardList"
+      },
+      {
+        "label": "TagLine",
+        "name": "tagline",
+        "fieldType": "text",
+        "column": 2,
+        "icon": "FaTag"
+      },
+      {
+        "label": "Original Price",
+        "name": "originalPrice",
+        "fieldType": "number",
+        "column": 1,
+        "icon": "FaDollarSign"
+      },
+      {
+        "label": "Selling Price",
+        "name": "sellingPrice",
+        "fieldType": "number",
+        "required":true,
+        "column": 1,
+        "icon": "FaMoneyBillAlt"
+      },
+      {
+        "label": "Category",
+        "name": "category",
+        "fieldType": "dropdown",
+        "required": true,
+        "options": ["Sedan",
+                    "SUV",
+                    "Truck",
+                    "Off-road",
+                    "Convertible",
+                    "Sports",
+                    "Hatchback",
+                    "Van",
+                    "Electric",
+                    "Hybrid"],
+        "column": 1,
+        "icon": "FaCar"
+      },
+      {
+        "label": "Condition",
+        "name": "condition",
+        "fieldType": "dropdown",
+        "required": true,
+        "options": [
+            "Excellent",
+            "Good",
+            "Fair",
+            "Needs Repair",
+            "Salvage"
+          ],
+          "icon": "FaCheckCircle"
+      },
+      {
+        "label": "Type",
+        "name": "type",
+        "fieldType": "dropdown",
+        "required":true,
+        "options":[
+            "New",
+            "Used",
+            "Certified Pre-Owned",
+            "Demo",
+            "Rental"
+          ],
+          "icon": "FaClipboardCheck"
+      },
+      {
+        "label": "Make",
+        "name": "make",
+        "fieldType": "dropdown",
+        "required": true,
+        "options": ["Toyota", "Honda", "Ford", "Chevrolet", "Nissan", "BMW", "Mercedes-Benz", "Audi", "Tesla","Kia","Jaguar-Land-Rover","Mahindra","Koenigsegg","New_Temprory"],
+        "column": 1,
+        "icon": "FaCar"
+      },
+      {
+        "label": "Model",
+        "name": "model",
+        "fieldType": "text",
+        "required": true,
+        "column": 1,
+        "icon": "FaCarSide"
+      },
+      {
+        "label": "Year",
+        "name": "year",
+        "fieldType": "number",
+        "required": true,
+        "column": 1,
+        "icon": "FaCalendarAlt"
+      },
+      {
+        "label": "Drive Type",
+        "name": "driveType",
+        "fieldType": "dropdown",
+        "required":true,
+        "options": ["FWD", "RWD", "AWD", "4WD"],
+        "column": 1,
+        "icon": "FaRoad"
+      },
+      {
+        "label": "Transmission",
+        "name": "transmission",
+        "fieldType": "dropdown",
+        "required":true,
+        "options": ["Manual", "Automatic"],
+        "column": 1,
+        "icon": "FaExchangeAlt"
+      },
+      {
+        "label": "Fuel Type",
+        "name": "fuelType",
+        "fieldType": "dropdown",
+        "required":true,
+        "options": ["Petrol", "Diesel", "Electric", "Hybrid"],
+        "column": 1,
+        "icon": "FaGasPump"
+      },
+      {
+        "label": "Mileage",
+        "name": "mileage",
+        "fieldType": "number",
+        "required":true,
+        "column": 1,
+        "icon": "FaTachometerAlt"
+      },
+      {
+        "label": "Distance Travelled",
+        "name": "distanceTravelled",
+        "fieldType": "text",
+        "column": 1,
+        "icon": "GiPathDistance"
+      },
+      {
+        "label": "Engine Size",
+        "name": "engineSize",
+        "fieldType": "text",
+        "column": 1,
+        "icon": "FaWrench"
+      },
+      {
+        "label": "Cylinder",
+        "name": "cylinder",
+        "fieldType": "number",
+        "column": 1,
+        "icon": "FaCogs"
+      },
+      {
+        "label": "Color",
+        "name": "color",
+        "fieldType": "dropdown",
+        "required": true,
+        "options": [
+            "Red", "Blue", "Green", "Black", "White", "Silver",
+            "Gray", "Yellow", "Orange", "Brown", "Gold", "Beige",
+            "Maroon", "Navy Blue", "Sky Blue", "Purple", "Pink", "Teal"
+          ],
+          "icon": "FaPalette"
+      },
+      {
+        "label": "Door",
+        "name": "door",
+        "fieldType": "number",
+        "required":true,
+        "column": 1,
+        "icon": "FaDoorOpen"
+      },
+      {
+        "label": "VIN",
+        "name": "vin",
+        "fieldType": "text",
+        "column": 1,
+        "icon": "FaIdCard"
+      },
+      {
+        "label": "Offer Type",
+        "name": "offerType",
+        "fieldType": "dropdown",
+        "options": ["Cash", "EMI", "Lease"],
+        "column": 1,
+        "icon": "FaHandHoldingUsd"
+      },
+      {
+        "label": "Listing Description",
+        "name": "description",
+        "fieldType": "textarea",
+        "required":true,
+        "column": 2,
+        "icon": "FaFileAlt"
+      },
+      {
+        "label": "CompanyLogo",
+        "name": "companyLogo",
+        "fieldType":"image",
+        "required": false
+      }
+      
+    ]
+  }
+  

@@ -1,0 +1,24 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "jsx":"react-jsx",
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "typeRoots": ["./node_modules/@types", "./vite-env.d.ts"],
+    "target": "ESNext",
+    "module": "ESNext"
+  }
+}

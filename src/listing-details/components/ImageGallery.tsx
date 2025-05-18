@@ -1,0 +1,45 @@
+import React from 'react'
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel"
+
+function ImageGallery({ carDetail }) {
+    if (!carDetail?.images || carDetail.images.length === 0) return null;
+
+    if (carDetail?.images.length <= 1) {
+      return (
+        <div>
+          <img
+            src={carDetail?.images[0]?.imageUrl}
+            className="w-full h-[500px] object-cover rounded-xl"
+          />
+        </div>
+      );
+    }
+
+    return (
+        <div className="relative group w-full">
+            <Carousel>
+                <CarouselContent>
+                    {carDetail.images.map((img, index) => (
+                        <CarouselItem key={index}>
+                            <img
+                                src={img.imageUrl}
+                                alt={`Car image ${index + 1}`}
+                                className="w-full h-[500px] object-cover rounded-xl"
+                            />
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+                <CarouselPrevious className='left-2 size-5 opacity-0 group-hover:size-8  group-hover:opacity-100 transition-all duration-800'/>
+                <CarouselNext className='right-2 size-5 opacity-0 group-hover:size-8  group-hover:opacity-100 transition-all duration-800'/>
+            </Carousel>
+        </div>
+    );
+}
+
+export default ImageGallery;
