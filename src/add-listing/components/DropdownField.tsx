@@ -15,6 +15,7 @@ interface DropdownFieldProps {
     options: string[];
   };
   handleInputChange: (name: string, value: string) => void;
+  carInfo?: any;
 }
 
 const DropdownField: React.FC<DropdownFieldProps> = ({ item, handleInputChange,carInfo }) => {

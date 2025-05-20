@@ -35,7 +35,7 @@ function UploadImages({
       setEditCarImageList([]);
       setTriggerUploadImages(Number(recordIdParam));
 
-      carInfo?.images.forEach((image) => {
+      carInfo?.images.forEach((image: any) => {
         setEditCarImageList(prev => [...prev, image?.imageUrl]);
       });
     }
@@ -115,6 +115,7 @@ function UploadImages({
         });
 
         setUploadedImageURLs(prev => [...prev, uploadImageURL.secure_url]);
+        
       } catch (error) {
         console.error("Error uploading image:", error);
       }

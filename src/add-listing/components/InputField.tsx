@@ -8,6 +8,7 @@ interface InputFieldProps {
     required?: boolean;
   };
   handleInputChange: (name: string, value: string) => void;
+  carInfo?: any;
 }
 
 function InputField({item,handleInputChange,carInfo}:InputFieldProps) {

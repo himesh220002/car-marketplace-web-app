@@ -7,14 +7,34 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Runtime
 node_modules
-dist
-dist-ssr
+.env
+.env.*.local
 *.local
 
+# Build outputs
+dist
+dist-ssr
+build
+.next
+out
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Drizzle
+.drizzle/
 .drizzle.config.ts
 
-# Editor directories and files
+# Clerk
+.clerk/
+
+# Testing
+coverage/
+*.lcov
+
+# Editor config
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -24,3 +44,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# OS junk
+Thumbs.db
+ehthumbs.db

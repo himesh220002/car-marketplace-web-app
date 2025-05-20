@@ -31,7 +31,21 @@ type formDataType = {
     [key: string]: string | number | boolean;
 };
 
-const defaultFeatures = features.features.reduce((acc, feature) => {
+type FeatureType = {
+  name: string;
+  label: string;
+};
+
+// type CarFieldType = {
+//   name: string;
+//   label: string;
+//   icon?: any;
+//   required?: boolean;
+//   fieldType: 'text' | 'number' | 'dropdown' | 'textarea';
+//   options?: string[];
+// };
+
+const defaultFeatures = features?.features?.reduce((acc: any, feature: FeatureType) => {
     acc[feature.name] = true;
     return acc;
 }, {});
@@ -41,14 +55,14 @@ function AddListing() {
     const [formData, setFormData] = useState<formDataType>({});
     const [featuresData, setFeaturesData] = useState(defaultFeatures);
     const [uploadedImageURLs, setUploadedImageURLs] = useState<string | null>(null);
-    const [triggerUploadImages, setTriggerUploadImages] = useState([]);
+    const [triggerUploadImages, setTriggerUploadImages] = useState<any >([]);
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const [loader, setLoader] = useState(false);
-    const [carInfo, setCarInfo] = useState();
+    const [carInfo, setCarInfo] = useState<any>();
 
     const { user } = useUser();
-    console.log("userfName "+user?.fullName+", metaPublic: "+user?.publicMetadata.fullName+", email: "+user?.primaryEmailAddress?.emailAddress);
+    // console.log("userfName "+user?.fullName+", metaPublic: "+user?.publicMetadata.fullName+", email: "+user?.primaryEmailAddress?.emailAddress);
 
     // const recordId = new URLSearchParams(location.search).get("id");
 
@@ -72,14 +86,14 @@ function AddListing() {
       
 
 
-    const GetListingDetail = async () => {
+    const GetListingDetail = async (): Promise<void> => {
         try {
             const result = await db
                 .select()
                 .from(CarListing)
                 .leftJoin(CarImages, eq(CarListing.id, CarImages.CarListingId))  // changed from innerJoin to leftJoin It fetches CarListing even if CarImages is missing (null).
                 // Prevents the form from breaking after last image is deleted.
-                .where(eq(CarListing.id, recordId));
+                .where(eq(CarListing.id, Number(recordId)));
 
 
             if (!result || result.length === 0) {
@@ -115,7 +129,7 @@ function AddListing() {
      * Handle feature change
      */
     const handleFeatureChange = (name: string, value: boolean) => {
-        setFeaturesData((prevData) => {
+        setFeaturesData((prevData: any) => {
             const updatedData = { ...prevData, [name]: value };
             return updatedData;
         })
@@ -124,7 +138,7 @@ function AddListing() {
 
 
 
-    const onSubmit = async (e: FormEvent) => {
+    const onSubmit = async (e: FormEvent): Promise<void> => {
         setLoader(true);
         e.preventDefault();
 
@@ -150,10 +164,10 @@ function AddListing() {
                 ...formData,
                 features: featuresData,
                 createdBy: user?.primaryEmailAddress?.emailAddress,
-                userName: user?.fullName,
+                userName: user?.fullName ?? "Alias",
                 userImageUrl: user?.imageUrl,
                 postedOn: moment().format('DD/MM/yyyy')
-            }).where(eq(CarListing.id, recordId)).returning({ id: CarListing.id });
+            }).where(eq(CarListing.id, Number(recordId))).returning({ id: CarListing.id });
             console.log(result);
             navigate('/profile');
 
@@ -182,9 +196,8 @@ function AddListing() {
                     
                     setTriggerUploadImages(result[0]?.id);
 
-                    setTimeout(() => {
-                        navigate('/profile');
-                      }, 5000);
+                    // navigate('/profile', { replace: true });
+
 
                 }
             } catch (error) {
@@ -244,11 +257,11 @@ function AddListing() {
                         <div>
                             <h2 className='font-medium text-xl my-6'>Features</h2>
                             <div className='grid grid-cols-2 md:grid-cols-3 gap-2'>
-                                {features?.features?.map((item, index) => (
-                                    <div key={index} className='flex gap-2 items-center'>
+                                {features?.features?.map((item) => (
+                                    <div key={item.name} className='flex gap-2 items-center'>
                                         <Checkbox
                                             checked={featuresData?.[item.name]}
-                                            onCheckedChange={(value: boolean) => handleFeatureChange(item.name, value)}
+                                            onCheckedChange={(value: boolean ) => handleFeatureChange(item.name, value)}
                                             id={item.name}
 
                                             className='data-[state=checked]:bg-blue-700 data-[state=checked]:border-blue-700' 
@@ -274,8 +287,8 @@ function AddListing() {
                                 triggerUploadImages={triggerUploadImages}
                                 setTriggerUploadImages={setTriggerUploadImages}
                                 carInfo={carInfo}
-                                mode={mode}
-                                recordId={recordId}
+                                mode={mode ?? "default"}
+                                recordId={recordId ? Number(recordId) : 0}
                                 setLoader={(v) => { setLoader(v); }}
                             />
                         )}
