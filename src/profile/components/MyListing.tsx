@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { db } from './../../../configs'
@@ -28,7 +28,7 @@ import { toast } from 'sonner'
 function MyListing() {
 
     const { user } = useUser();
-    const [carList, setCarList] = useState([]);
+    const [carList, setCarList] = useState<any>([]);
     const [isAlertOpen, setAlertIsOpen] = useState(false);
     const [selectedCarId, setSelectedCarId] = useState<number | null>(null);
 
@@ -41,7 +41,7 @@ function MyListing() {
     const GetUserCarListing = async () => {
         const result = await db.select().from(CarListing)
             .leftJoin(CarImages, eq(CarListing.id, CarImages.CarListingId))
-            .where(eq(CarListing.createdBy, user?.primaryEmailAddress?.emailAddress))
+            .where(eq(CarListing.createdBy, user?.primaryEmailAddress?.emailAddress as string))
             .orderBy(desc(CarListing.id))
 
         const resp = Service.FormatResult(result)
@@ -54,7 +54,7 @@ function MyListing() {
         if (!selectedCarId) return;
 
         // 🔍 Find the car in state by ID
-    const carToDelete = carList.find((car) => car.id === selectedCarId);
+    const carToDelete = carList.find((car: any) => car.id === selectedCarId);
 
     if (!carToDelete) {
         console.warn('Car not found in list for ID:', selectedCarId);
@@ -71,7 +71,7 @@ function MyListing() {
         await db.delete(CarListing).where(eq(CarListing.id, selectedCarId));
 
         // Step 3: Update UI
-        setCarList((prevList) => prevList.filter(car => car.id !== selectedCarId));
+        setCarList((prevList : any) => prevList.filter((car : any) => car.id !== selectedCarId));
 
         toast.success(`Deleted "${carToDelete.listingTitle}"`);
         setAlertIsOpen(false);
@@ -95,7 +95,7 @@ function MyListing() {
             </div>
 
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-7 gap-5'>
-                {carList.map((item, index) => (
+                {carList.map((item : any, index: number) => (
                     <div key={index}>
                         <CarItem car={item} />
                         <div className='p-2 bg-gray-50 rounded-lg flex justify-between gap-3'>
