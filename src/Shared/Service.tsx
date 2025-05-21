@@ -11,8 +11,10 @@ type CarListing = {
 
 type ResponseItem = {
     carListing?: CarListing;
-    carImages?: any[];
+    carImages?: any | null;
 };
+
+
 
 const FormatResult = (resp: ResponseItem[]): CarListing[] => {
     let result: Record<number, { car: CarListing; images: any[] }> = {};
@@ -20,11 +22,11 @@ const FormatResult = (resp: ResponseItem[]): CarListing[] => {
 
     resp.forEach((item) => {
         const listingId = item.carListing?.id;
-        if (!listingId) return;
+        if (!listingId || !item.carListing) return;
 
         if (!result[listingId]) {
             result[listingId] = {
-                car: item.carListing,
+                car: item?.carListing,
                 images: []
             };
         }
@@ -44,7 +46,7 @@ const FormatResult = (resp: ResponseItem[]): CarListing[] => {
     return finalResult;
 };
 
-const CreateSendBirdUser=async(userId,nickName,profileUrl)=>{
+const CreateSendBirdUser=async(userId:string, nickName:any, profileUrl:string)=>{
     try {
         // First, check if the user already exists in SendBird
         const checkUser = await axios.get(`https://api-${SendBirdApplicationId}.sendbird.com/v3/users/${userId}`, {
@@ -60,7 +62,8 @@ const CreateSendBirdUser=async(userId,nickName,profileUrl)=>{
         }
       } catch (error) {
         // If the user doesn't exist, the API will return an error, so proceed with creation
-        if (error.response?.status !== 404) {
+
+        if (error instanceof Error) {
           console.error("❌ Error checking user existence:", error);
           return;
         }
@@ -79,7 +82,7 @@ const CreateSendBirdUser=async(userId,nickName,profileUrl)=>{
     })
 }
 
-const CreateSendBirdChannel=(users,title)=>{
+const CreateSendBirdChannel=(users:any,title:any)=>{
     return axios.post('https://api-'+SendBirdApplicationId+'.sendbird.com/v3/group_channels',{
         user_ids: users,
         is_distinct: true,
