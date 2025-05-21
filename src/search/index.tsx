@@ -2,7 +2,7 @@ import Service from '@/Shared/Service';
 import { db } from './../../configs';
 import { CarImages, CarListing } from './../../configs/schema';
 import { eq, and, lte } from 'drizzle-orm';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Search from '@/components/Search';
 import Header from '@/components/Header';
@@ -11,12 +11,12 @@ import CarItem from '@/components/CarItem';
 function SearchByOptions() {
 
     const [searchParams] = useSearchParams();
-    const [carList, setCarList] = useState([]);
+    const [carList, setCarList] = useState<any>([]);
 
     const rawType = searchParams.get('cars');
 const rawMake = searchParams.get('make');
 const rawPrice = searchParams.get('price');
- const rawParsedPrice = parseInt(rawPrice);
+ const rawParsedPrice = rawPrice? parseInt(rawPrice): undefined;
 
 // Normalize values
 const type = rawType !== 'undefined' ? rawType : undefined;
@@ -59,13 +59,13 @@ const price = rawPrice !== 'undefined' ? rawParsedPrice : undefined;
         <h2 className='font-bold text-4xl '>Search Results</h2>
 
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7'>
-          {carList?.length>0? carList.map((item,index)=>(
+          {carList?.length>0? carList.map((item: any,index: number)=>(
             <div key={index}>
               <CarItem car={item} />
             </div>
           )):
-          [1,2,3,4,5,6].map((item,index)=>(
-            <div className='h-[364px] rounded-xl bg-slate-200 animate-pulse'>
+          Array(6).fill(0).map((_,index)=>(
+            <div key={index} className='h-[364px] rounded-xl bg-slate-200 animate-pulse'>
 
             </div>
           ))

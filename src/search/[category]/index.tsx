@@ -3,7 +3,7 @@ import Search from '@/components/Search'
 import { db } from './../../../configs';
 import { CarImages, CarListing } from './../../../configs/schema';
 import { eq } from 'drizzle-orm';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Service from '@/Shared/Service';
 import CarItem from '@/components/CarItem';
@@ -11,7 +11,7 @@ import CarItem from '@/components/CarItem';
 function SearchByCategory() {
 
   const {category}= useParams();
-  const [carList, setCarList] = useState([]);
+  const [carList, setCarList] = useState<any>([]);
 
   useEffect(()=>{
      // Scroll to top when component mounts
@@ -22,7 +22,7 @@ function SearchByCategory() {
   const GetCarList=async()=>{
     const result= await db.select().from(CarListing)
     .innerJoin(CarImages,eq(CarListing.id,CarImages.CarListingId))
-    .where(eq(CarListing.category, category))
+    .where(eq(CarListing.category, category as string))
 
     const resp = Service.FormatResult(result);
 
@@ -40,13 +40,13 @@ function SearchByCategory() {
         <h2 className='font-bold text-4xl '>{category}</h2>
 
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7'>
-          {carList.length>0? carList.map((item,index)=>(
+          {carList.length>0? carList.map((item: any,index:number)=>(
             <div key={index}>
               <CarItem car={item} />
             </div>
           )):
-          [1,2,3,4,5,6].map((item,index)=>(
-            <div className='h-[364px] rounded-xl bg-slate-200 animate-pulse'>
+          Array(6).fill(0).map((_,index)=>(
+            <div key={index} className='h-[364px] rounded-xl bg-slate-200 animate-pulse'>
 
             </div>
           ))
