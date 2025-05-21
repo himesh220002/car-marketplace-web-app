@@ -9,15 +9,16 @@ import {
 import { Separator } from './ui/separator'
 
 import { CiSearch } from "react-icons/ci";
-import data from '@/Shared/data';
+import data from '@/Shared/Data';
 import { Link } from 'react-router-dom';
 
 
 function Search() {
 
-    const [cars,setCars] = useState();
-    const [make,setMake] = useState();
-    const [price,setPrice] = useState();
+    const [cars, setCars] = useState<string | undefined>();
+const [make, setMake] = useState<string | undefined>();
+const [price, setPrice] = useState<string | undefined>();
+
 
     const [isOpen, setIsOpen] = useState(false);
     

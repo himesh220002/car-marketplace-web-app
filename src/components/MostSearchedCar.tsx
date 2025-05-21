@@ -1,5 +1,5 @@
-import FakeData from '@/Shared/FakeData'
-// import React from 'react'
+// import FakeData from '@/Shared/FakeData'
+
 import CarItem from './CarItem';
 import {
     Carousel,
@@ -12,13 +12,13 @@ import Service from '@/Shared/Service';
 import { db } from './../../configs';
 import { CarListing, CarImages } from './../../configs/schema';
 import { eq, desc } from 'drizzle-orm';
-import React, { useEffect , useState } from 'react';
+import  { useEffect , useState } from 'react';
 
 
 
 function MostSearchedCar() {
 
-    const [carList, setCarList] = useState([]);
+    const [carList, setCarList] = useState<any[]>([]);
     useEffect(()=>{
         GetPopularCarList();
     },[])

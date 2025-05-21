@@ -8,21 +8,9 @@ import { MdOpenInNew } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
 
-type Car = {
-    id: number;
-    listingTitle: string;
-    images: string;
-    mileage: number;
-    fuelType: string;
-    transmission: string;
-    sellingPrice: number;   
-  };
+
   
-  type CarItemProps = {
-    car: Car;
-  };
-  
-  function CarItem({ car }: CarItemProps) {
+  function CarItem({ car }: any) {
 
     const engineType = (car?.fuelType == 'Electric' )? ' Km' : ' Km/L';
 
