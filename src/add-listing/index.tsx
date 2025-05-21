@@ -1,5 +1,5 @@
 import Header from '@/components/Header'
-import react, { FormEvent, useEffect } from 'react'
+import { FormEvent, useEffect } from 'react'
 import carDetails from './../Shared/carDetails.json'
 import InputField from './components/InputField'
 import DropdownField from './components/DropdownField'
