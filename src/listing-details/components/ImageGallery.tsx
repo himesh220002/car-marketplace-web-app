@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {
     Carousel,
     CarouselContent,
@@ -7,7 +7,11 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 
-function ImageGallery({ carDetail }) {
+type Props ={
+    carDetail: any
+}
+
+function ImageGallery({ carDetail }: Props) {
     if (!carDetail?.images || carDetail.images.length === 0) return null;
 
     if (carDetail?.images.length <= 1) {
@@ -25,7 +29,7 @@ function ImageGallery({ carDetail }) {
         <div className="relative group w-full">
             <Carousel>
                 <CarouselContent>
-                    {carDetail.images.map((img, index) => (
+                    {carDetail.images.map((img: any, index: number) => (
                         <CarouselItem key={index}>
                             <img
                                 src={img.imageUrl}

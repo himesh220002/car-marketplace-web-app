@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { MdOutlineLocalOffer } from 'react-icons/md';
 import { Button } from '@/components/ui/button';
 
-function Pricing({ carDetail }) {
+
+function Pricing({ carDetail }: any) {
   const [currency, setCurrency] = useState('USD');
   const exchangeRate = 85; // Static for now — replace with API for live rates
 
@@ -11,7 +12,7 @@ function Pricing({ carDetail }) {
   };
 
   // Format numbers with commas
-  const formatPrice = (price, currency) => {
+  const formatPrice = (price: number, currency:string) => {
     if (currency === 'INR') {
       return new Intl.NumberFormat('en-IN').format(price); // 1,00,000
     } else {

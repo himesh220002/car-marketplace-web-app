@@ -1,21 +1,33 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import React, { useState } from 'react'
+import  { useEffect, useState } from 'react'
 
 // ✅ Format numbers with commas based on currency
 const formatPrice = (price: number, currency: 'usd' | 'inr') => {
     return new Intl.NumberFormat(currency === 'inr' ? 'en-IN' : 'en-US').format(price)
 }
 
-function FinancialCalculator({ carDetail }) {
+type Props ={
+    carDetail: any
+}
+
+function FinancialCalculator({ carDetail } : Props) {
     const [currency, setCurrency] = useState<'usd' | 'inr'>('usd')
     const exchangeRate = 85 // 1 USD = ₹85
 
     const [carPrice, setCarPrice] = useState(0);
-    const [interestRate, setInterestRate] = useState(0)
-    const [loanTerm, setLoanTerm] = useState(0)
+    const [interestRate, setInterestRate] = useState(8)
+    const [loanTerm, setLoanTerm] = useState(36)
     const [downPayment, setDownPayment] = useState(0)
     const [monthlyPayment, setMonthlyPayment] = useState(0)
+
+    useEffect(() => {
+    if (carDetail?.sellingPrice) {
+        setCarPrice(carDetail?.sellingPrice);
+        setDownPayment((carDetail?.sellingPrice)*0.1);
+        setMonthlyPayment(0);
+    }
+}, [carDetail?.id]); 
 
     // 🔁 Currency toggle and live conversion
     const handleCurrencyToggle = () => {

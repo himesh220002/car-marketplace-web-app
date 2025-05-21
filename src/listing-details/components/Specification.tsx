@@ -1,9 +1,9 @@
 import IconField from '@/add-listing/components/IconField'
 import CarSpecification from '@/Shared/CarSpecification'
-import React,{useState} from 'react'
+import {useState} from 'react'
 
-function Specification({carDetail}) {
-  const [hoveredField, setHoveredField] = useState(null)
+function Specification({carDetail}: any) {
+  const [hoveredField, setHoveredField] = useState<string | null>(null)
 
   if (!carDetail) return null
 
@@ -30,7 +30,7 @@ function Specification({carDetail}) {
            const driveType = carDetail?.driveType;
            const driveType_img = getDriveType(driveType);
 
-  const imageMap = {
+  const imageMap: {[key:string]: string} = {
     driveType: `/icons/${driveType_img}`,
     transmission: `/icons/${trans_img}`,
   }

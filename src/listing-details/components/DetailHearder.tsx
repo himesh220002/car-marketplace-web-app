@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { HiCalendarDays } from "react-icons/hi2";
 import { IoSpeedometerOutline   } from "react-icons/io5";
 import { GiGearStickPattern } from "react-icons/gi";
@@ -10,11 +10,15 @@ import { RiChargingPileFill } from "react-icons/ri";
 import { GiPathDistance } from "react-icons/gi";
 
 
+type props = {
+    carDetail: any
+    
+}
 
-function DetailHearder({ carDetail }) {
+function DetailHearder({ carDetail }: props) {
     const carengine = (carDetail?.fuelType == 'Electric') ? 'Km/Chrg.' : 'Km/L';
 
-    const getCategoryImage = (category) => {
+    const getCategoryImage = (category : string) => {
         switch (category) {
             case 'SUV':
                 return '/suv-car.png';
@@ -40,7 +44,7 @@ function DetailHearder({ carDetail }) {
                 return '/coupe.png';
         }
     };
-    const getMakeLogo = (make) => {
+    const getMakeLogo = (make : string) => {
         switch (make) {
             case 'Toyota':
                 return '/Company Logos/toyotalogo.png';

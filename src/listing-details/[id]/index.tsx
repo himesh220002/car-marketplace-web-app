@@ -1,5 +1,5 @@
 import Header from '@/components/Header'
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import DetailHearder from '../components/DetailHearder'
 import { useParams } from 'react-router-dom'
 import { CarImages, CarListing } from './../../../configs/schema';
@@ -16,10 +16,28 @@ import Footer from '@/components/Footer';
 import FinancialCalculator from '../components/FinancialCalculator';
 import MostSearchedCar from '@/components/MostSearchedCar';
 
+type Feature = {
+  label: string;
+  name: string;
+  fieldType: string;
+};
+
+type CarDetailType = {
+  id: number;
+  listingTitle: string;
+  sellingPrice: number;
+  fuelType: string;
+  transmission: string;
+  mileage: number;
+  features?: Feature[];  // <-- Correctly typed features
+  images: { imageUrl: string }[];
+  [key: string]: any;
+};
+
 function ListingDetail() {
 
     const { id } = useParams();
-    const [carDetail, setCarDetail] = useState();
+    const [carDetail, setCarDetail] = useState<CarDetailType>();
 
     useEffect(() => {
         // Scroll to top when component mounts
@@ -30,10 +48,10 @@ function ListingDetail() {
     const GetCarDetail = async () => {
         const result = await db.select().from(CarListing)
             .innerJoin(CarImages, eq(CarListing.id, CarImages.CarListingId))
-            .where(eq(CarListing.id, id))
+            .where(eq(CarListing.id, Number(id)))
 
         const resp = Service.FormatResult(result);
-        console.log(resp);
+        console.log("CarDetails: ",resp);
         setCarDetail(resp[0]);
     }
 

@@ -1,6 +1,10 @@
-import React from 'react'
 
-function Description({ carDetail }) {
+type descrip = {
+  carDetail?: any;
+};
+
+
+function Description({ carDetail }: descrip) {
     return (
 
         <div>

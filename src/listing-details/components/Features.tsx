@@ -1,13 +1,16 @@
-import React from 'react'
+
 import { FaCheck} from "react-icons/fa";
 import { ImCross  } from "react-icons/im";
 
+type featu ={
+    features: any
+}
 
 
-function Features({ features }) {
+function Features({ features }: featu) {
     if (!features) return null; 
 
-    console.log(features);
+   
     return (
         
             <div className='p-10 mt-7 bg-white rounded-xl border shadow-md '>

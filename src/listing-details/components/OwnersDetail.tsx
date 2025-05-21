@@ -1,10 +1,11 @@
 import { Button } from '@/components/ui/button'
 import Service from '@/Shared/Service'
 import { useUser } from '@clerk/clerk-react'
-import React from 'react'
+
 import { useNavigate } from 'react-router-dom';
 
-function OwnersDetail({carDetail}) {
+
+function OwnersDetail({carDetail}: any) {
 
   const {user} = useUser();
 
@@ -12,7 +13,14 @@ function OwnersDetail({carDetail}) {
 
   const OnMessageOwnerButtonClick=async() =>{
 
-    const userId= user?.primaryEmailAddress?.emailAddress.split('@')[0];
+    const email = user?.primaryEmailAddress?.emailAddress;
+
+    if(!email){
+      console.error("User email not found");
+      return;
+    }
+
+    const userId= email.split('@')[0];
     const OwnerUserId= carDetail?.createdBy.split('@')[0];
 
 
