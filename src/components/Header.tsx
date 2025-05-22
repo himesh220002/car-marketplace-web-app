@@ -6,7 +6,10 @@ import './Css/header.css';
 function Header() {
   const { user, isSignedIn } = useUser();
   const location = useLocation(); // Get current page path
-  console.log("user : ",user?.fullName);
+  if(!user){
+  console.log("user : ",user);
+}
+
   
   return (
     <header className="">

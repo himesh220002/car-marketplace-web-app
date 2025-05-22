@@ -20,16 +20,18 @@ import { BiLoaderAlt } from "react-icons/bi";
 import { toast } from 'sonner'
 import { useUser } from '@clerk/clerk-react'
 import moment from 'moment'
-import { eq } from 'drizzle-orm'
+import { eq, InferInsertModel } from 'drizzle-orm'
 import Service from '@/Shared/Service'
 
 
 
 
 
-type formDataType = {
-    [key: string]: string | number | boolean;
-};
+// type formDataType = {
+//     [key: string]: string | number | boolean;
+// };
+
+type InsertCarType = InferInsertModel<typeof CarListing>;
 
 
 
@@ -48,11 +50,12 @@ const defaultFeatures = features?.features?.reduce((acc: any, feature: any) => {
 }, {});
 
 
+
 function AddListing() {
-    const [formData, setFormData] = useState<formDataType>({});
-    const [featuresData, setFeaturesData] = useState(defaultFeatures);
+    const [formData, setFormData] = useState<any>({});
+    const [featuresData, setFeaturesData] = useState<Record<string, boolean>>(defaultFeatures);
     const [uploadedImageURLs, _setUploadedImageURLs] = useState<string | null>(null);
-    const [triggerUploadImages, setTriggerUploadImages] = useState<any >([]);
+    const [triggerUploadImages, setTriggerUploadImages] = useState<any>([]);
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const [loader, setLoader] = useState(false);
@@ -73,14 +76,14 @@ function AddListing() {
         }
     }, [recordId, uploadedImageURLs, mode]);
 
-    
+
 
     useEffect(() => {
         console.log("🚀 📦 Recieved triggerUploadImages ID:", triggerUploadImages);
     }, [triggerUploadImages]);
 
-    
-      
+
+
 
 
     const GetListingDetail = async (): Promise<void> => {
@@ -97,7 +100,7 @@ function AddListing() {
                 console.warn("⚠️ No data found for record ID:", recordId);
                 return;
             }
-            console.log("result db select(): ",result);
+            console.log("result db select(): ", result);
 
             const resp = Service.FormatResult(result);
             setCarInfo(resp[0]);
@@ -113,7 +116,7 @@ function AddListing() {
      * use to capture user input from form
      */
     const handleInputChange = (name: string, value: string | number | boolean) => {
-        setFormData((prevData) => {
+        setFormData((prevData: any) => {
             const updatedData = { ...prevData, [name]: value };
             return updatedData;
         })
@@ -179,19 +182,19 @@ function AddListing() {
         else {
 
             try {
-                
-                const result = await db.insert(CarListing).values({
-                    ...formData,
+                const payload: InsertCarType= {
+                ...(formData as InsertCarType),
                     features: featuresData,
-                    createdBy: user?.primaryEmailAddress?.emailAddress,
-                    userName: user?.fullName ?? user?.publicMetadata.fullName ?? "Unknown User",
-                    userImageUrl: user?.imageUrl,
+                    createdBy: user?.primaryEmailAddress?.emailAddress ?? '',
+                    userName: user?.fullName ?? "Alias",
+                    userImageUrl: user?.imageUrl ?? '',
                     postedOn: moment().format('DD/MM/yyyy')
+                };
 
-                }).returning({ id: CarListing.id });
+                const result = await db.insert(CarListing).values(payload).returning({ id: CarListing.id });
                 if (result) {
                     console.log("✅ Data Saved");
-                    
+
                     setTriggerUploadImages(result[0]?.id);
 
                     // navigate('/profile', { replace: true });
@@ -230,20 +233,20 @@ function AddListing() {
                                     <div key={index}>
                                         <label className='text-sm flex gap-2 items-center mb-1'>
                                             <IconField icon={item?.icon} />
-                                            {item?.label} 
+                                            {item?.label}
                                             {item.required && <span className='text-red-500'>*</span>}
                                         </label>
 
                                         {item.fieldType === "text" || item.fieldType == 'number'
                                             ? <InputField item={item} handleInputChange={handleInputChange} carInfo={carInfo} />
                                             : item.fieldType == "dropdown" ? <DropdownField item={item} handleInputChange={handleInputChange} carInfo={carInfo} />
-                                            : item.fieldType == "textarea" ? 
-                                            <TextAreaField
-                                                item={item}
-                                                handleInputChange={handleInputChange}
-                                                carInfo={carInfo}
-                                            />
-                                            : null}
+                                                : item.fieldType == "textarea" ?
+                                                    <TextAreaField
+                                                        item={item}
+                                                        handleInputChange={handleInputChange}
+                                                        carInfo={carInfo}
+                                                    />
+                                                    : null}
 
                                     </div>
                                 ))}
@@ -259,10 +262,10 @@ function AddListing() {
                                     <div key={item.name} className='flex gap-2 items-center'>
                                         <Checkbox
                                             checked={featuresData?.[item.name]}
-                                            onCheckedChange={(value: boolean ) => handleFeatureChange(item.name, value)}
+                                            onCheckedChange={(value: boolean) => handleFeatureChange(item.name, value)}
                                             id={item.name}
 
-                                            className='data-[state=checked]:bg-blue-700 data-[state=checked]:border-blue-700' 
+                                            className='data-[state=checked]:bg-blue-700 data-[state=checked]:border-blue-700'
                                         />
 
                                         <label htmlFor={item.name}>{item.label}</label>
