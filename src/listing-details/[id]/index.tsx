@@ -52,7 +52,8 @@ function ListingDetail() {
 
         const resp = Service.FormatResult(result);
         console.log("CarDetails: ",resp);
-        setCarDetail(resp[0]);
+        
+        setCarDetail(resp[0] as any);
     }
 
     return (

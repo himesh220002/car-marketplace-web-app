@@ -31,10 +31,7 @@ type formDataType = {
     [key: string]: string | number | boolean;
 };
 
-type FeatureType = {
-  name: string;
-  label: string;
-};
+
 
 // type CarFieldType = {
 //   name: string;
@@ -45,7 +42,7 @@ type FeatureType = {
 //   options?: string[];
 // };
 
-const defaultFeatures = features?.features?.reduce((acc: any, feature: FeatureType) => {
+const defaultFeatures = features?.features?.reduce((acc: any, feature: any) => {
     acc[feature.name] = true;
     return acc;
 }, {});
@@ -182,6 +179,7 @@ function AddListing() {
         else {
 
             try {
+                
                 const result = await db.insert(CarListing).values({
                     ...formData,
                     features: featuresData,

@@ -6,6 +6,7 @@ const SendBirdApiToken = import.meta.env.VITE_SENDBIRD_API_TOKEN;
 
 type CarListing = {
     id: number;
+    features?: any;
     [key: string]: any;
 };
 
