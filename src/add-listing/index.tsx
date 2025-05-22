@@ -54,7 +54,7 @@ const defaultFeatures = features?.features?.reduce((acc: any, feature: FeatureTy
 function AddListing() {
     const [formData, setFormData] = useState<formDataType>({});
     const [featuresData, setFeaturesData] = useState(defaultFeatures);
-    const [uploadedImageURLs, setUploadedImageURLs] = useState<string | null>(null);
+    const [uploadedImageURLs, _setUploadedImageURLs] = useState<string | null>(null);
     const [triggerUploadImages, setTriggerUploadImages] = useState<any >([]);
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();

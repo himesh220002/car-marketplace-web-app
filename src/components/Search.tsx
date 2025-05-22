@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import {
     Select,
     SelectContent,
@@ -32,7 +32,7 @@ const [price, setPrice] = useState<string | undefined>();
                     <SelectValue placeholder="Car" />
                 </SelectTrigger>
                 <SelectContent>
-                {data.Type.map((type,index)=>(
+                {data.Type.map((type,_index)=>(
                         <SelectItem value={type.name}>{type.name}</SelectItem>
                     ))}
                 <SelectItem value="all">All Cars</SelectItem>
@@ -46,7 +46,7 @@ const [price, setPrice] = useState<string | undefined>();
                 </SelectTrigger>
                 <SelectContent>
                 
-                    {data.CarMakes.map((maker,index)=>(
+                    {data.CarMakes.map((maker,_index)=>(
                         <SelectItem value={maker.name}>{maker.name}</SelectItem>
                     ))}
                     <SelectItem value="all">All Car Makers</SelectItem>
@@ -63,7 +63,7 @@ const [price, setPrice] = useState<string | undefined>();
                     <SelectValue placeholder={isOpen ? "Pricing(<=)" : "Pricing"} />
                 </SelectTrigger>
                 <SelectContent>
-                {data.Pricing.map((Price,index)=>(
+                {data.Pricing.map((Price,_index)=>(
                         <SelectItem value={Price.amount}>{Price.amount}</SelectItem>
                     ))}
                 <SelectItem value="all">All Pricing</SelectItem>

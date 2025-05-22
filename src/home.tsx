@@ -1,6 +1,6 @@
-import { SignInButton } from '@clerk/clerk-react'
-import React, { useEffect } from 'react'
-import { Button } from './components/ui/button'
+
+import  { useEffect } from 'react'
+
 import Header from './components/Header'
 import Hero from './components/Hero'
 import MostSearchedCar from './components/MostSearchedCar'

@@ -1,7 +1,7 @@
-import React from 'react'
+
 import { Textarea } from '@/components/ui/textarea'
 
-function TextAreaField({item, handleInputChange, carInfo}) {
+function TextAreaField({item, handleInputChange, carInfo}: any) {
   return (
     <div>
         <Textarea onChange={(e)=>handleInputChange(item.name,e.target.value)}

@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+
 import { db } from './../../../configs';
 import { CarImages } from './../../../configs/schema';
 import React, { useState, useEffect } from 'react';
@@ -24,7 +24,7 @@ function UploadImages({
   recordId
 }: UploadImagesProps) {
   const [selectedFileList, setSelectedFileList] = useState<File[]>([]);
-  const [uploadedImageURLs, setUploadedImageURLs] = useState<string[]>([]);
+  const [_uploadedImageURLs, setUploadedImageURLs] = useState<string[]>([]);
   const [editCarImageList, setEditCarImageList] = useState<string[]>([]);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -57,7 +57,7 @@ function UploadImages({
     const newFiles = files.filter(file => !selectedFileList.includes(file));
   
     console.log("📁 Selected files:");
-    newFiles.forEach((file, index) => {
+    newFiles.forEach((file, _index) => {
       console.log(`- ${file.name} (${file.type}, ${file.size} bytes)`);
     });
   
@@ -65,7 +65,7 @@ function UploadImages({
   };
   
 
-  const onImageRemove = (image: File, index: number) => {
+  const onImageRemove = (image: File, _index: number) => {
     const result = selectedFileList.filter((item) => item !== image);
     setSelectedFileList(result);
   };
