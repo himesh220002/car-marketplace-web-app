@@ -25,10 +25,10 @@ const [price, setPrice] = useState<string | undefined>();
 
 
     return (
-        <div className='p-2 md:p-5 bg-white rounded-md md:rounded-full 
-                    flex-col md:flex md:flex-row gap-10 px-5 items-center w-[60%] md:w-[600px] lg:w-[820px]'>
+        <div className='p-2 md:p-5 bg-transparent md:bg-white rounded-md md:rounded-full 
+                     flex-col sm:justify-end md:flex md:flex-row gap-10 px-5 items-center w-[60%] md:w-[600px] lg:w-[820px]'>
             <Select onValueChange={(value)=>setCars(value === 'all' ? undefined : value)}>
-                <SelectTrigger className="w-full outline-none md:border-none shadow-none text-lg">
+                <SelectTrigger className="w-full outline-none md:border-none shadow-none text-lg bg-white mb-1">
                     <SelectValue placeholder="Car" />
                 </SelectTrigger>
                 <SelectContent>
@@ -41,7 +41,7 @@ const [price, setPrice] = useState<string | undefined>();
             </Select>
             <Separator orientation="vertical" className='hidden md:block'/>
             <Select onValueChange={(value)=>setMake(value === 'all' ? undefined : value)}>
-                <SelectTrigger className="w-full outline-none md:border-none shadow-none text-lg">
+                <SelectTrigger className="w-full outline-none md:border-none shadow-none text-lg bg-white mb-1">
                     <SelectValue placeholder="Car Makes " />
                 </SelectTrigger>
                 <SelectContent>
@@ -59,7 +59,7 @@ const [price, setPrice] = useState<string | undefined>();
             <Select
             onOpenChange={(open) => setIsOpen(open)} 
             onValueChange={(value)=>setPrice(value === 'all' ? undefined : value)}>
-                <SelectTrigger className="w-full outline-none md:border-none shadow-none text-lg">
+                <SelectTrigger className="w-full outline-none md:border-none shadow-none text-lg bg-white mb-1">
                     <SelectValue placeholder={isOpen ? "Pricing(<=)" : "Pricing"} />
                 </SelectTrigger>
                 <SelectContent>
@@ -71,13 +71,11 @@ const [price, setPrice] = useState<string | undefined>();
                 </SelectContent>
             </Select>
             
-            <Link to={'/search?cars='+cars+'&make='+make+'&price='+price} 
-            
-            >
+            <Link to={'/search?cars='+cars+'&make='+make+'&price='+price} >
                 
-                <CiSearch className='text-[50px] bg-blue-700 rounded-full p-3 text-white hover:scale-105 transition-all cursor-pointer' />
+                <CiSearch className='text-[50px] bg-blue-700 rounded-full p-3 text-white hover:scale-105 transition-all cursor-pointer ml-auto' />
                 
-                </Link>
+            </Link>
 
         </div>
     )

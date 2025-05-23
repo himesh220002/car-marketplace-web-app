@@ -13,7 +13,7 @@ function Hero() {
                             style={{ backgroundImage: "url('/digital-art-1.jpg')" ,  backgroundSize: "cover", backgroundPosition: "bottom"}}>
 
                 <h2 className='text-lg '>Find cars for sale and for rent near you.</h2>
-                <h2 className='text-4xl md:text-5xl lg:text-[60px] font-bold'>Find Your Dream Car</h2>
+                <h2 className='text-center text-3xl md:text-5xl lg:text-[60px] font-bold'>Find Your Dream Car</h2>
 
                 <Search />
 
@@ -27,7 +27,7 @@ function Hero() {
                     {/* <img src="/black-hole-png.png" className="absolute left-[94%] bottom-0 w-[90px] opacity-50 z-10" /> */}
 
                     {/* Moving Car */}
-                    <img src="/cpng.png" alt="car" className="car-slide" />
+                    <img src="/cpng.png" alt="car" className="hidden sm:block car-slide" />
                 
 
             </div>
