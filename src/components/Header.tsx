@@ -20,10 +20,8 @@ function Header() {
         <ul className="hidden md:flex gap-10">
           {[
             { name: "Home", path: "/" },
-            { name: "Search", path: "/search" },
-            { name: "Profile", path: "/profile" },
-            { name: "New", path: "/new" },
-            { name: "Preowned", path: "/preowned" },
+            { name: "New", path: "#" },
+            { name: "Preowned", path: "#" },
           ].map((item) => (
             <li key={item.path} className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-blue-700">
               <a href={item.path} className={`relative ${location.pathname === item.path ? "active" : ""}`}>
