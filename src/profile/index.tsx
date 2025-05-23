@@ -17,7 +17,9 @@ function Profile() {
         <Tabs defaultValue="my-listing" className="w-full">
           <TabsList className=''>
             <TabsTrigger value="my-listing" >My Listing</TabsTrigger>
-            <TabsTrigger value="inbox" >Inbox</TabsTrigger>
+            <TabsTrigger value="inbox" className='relative' >Inbox
+               <span className="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+            </TabsTrigger>
             <TabsTrigger value="profile" >Profile</TabsTrigger>
           </TabsList>
           <TabsContent value="my-listing">
