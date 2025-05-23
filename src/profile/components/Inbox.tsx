@@ -6,6 +6,7 @@ import { GroupChannelList } from '@sendbird/uikit-react/GroupChannelList';
 import { GroupChannel } from '@sendbird/uikit-react/GroupChannel';
 
 
+
 function Inbox() {
   const { user } = useUser();
   const [userId, setUserId] = useState<string>();
@@ -22,8 +23,8 @@ function Inbox() {
   if (!userId) return null;
 
   return (
-    <div className='bg-orange-100 px-4 py-2'>
-      <div style={{ width: '100%', height: '600px' }}>
+    <div className='bg-orange-100 p-0  md:px-4 md:py-2'>
+      <div style={{ width: '100%', height: '100vh' }}>
         <SendBirdProvider
           appId={import.meta.env.VITE_SENDBIRD_APP_ID}
           userId={userId}
@@ -31,8 +32,16 @@ function Inbox() {
           profileUrl={user?.imageUrl ?? "https://res.cloudinary.com/dbcx5bxea/image/upload/v1747459046/alt_user_qoqovf.avif"}
           allowProfileEdit={true}
         // accessToken={import.meta.env.VITE_SENDBIRD_ACCESS_TOKEN}
+
+        imageCompression={{
+                compressionRate: 0.5,
+                // The default value changed from 1.0 to 0.7 starting in v3.3.3.
+                resizingWidth: 200,
+                resizingHeight: '200px',
+            }}
+
         >
-          <div className='grid grid-cols-1 md:flex  gap-2  h-full '>
+          <div className='grid grid-cols-1 lg:flex gap-1 md:gap-2 h-full '>
             {/* Channel List */}
             <div className=' border shadow-lg  '>
               <GroupChannelList

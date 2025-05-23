@@ -12,7 +12,7 @@ function Profile() {
   return (
     <div>
       <Header />
-      <div className='px-10 md:px-20 my-10'>
+      <div className='px-1 md:px-20 my-10'>
 
         <Tabs defaultValue="my-listing" className="w-full">
           <TabsList className=''>
