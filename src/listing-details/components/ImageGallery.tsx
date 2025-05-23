@@ -34,13 +34,13 @@ function ImageGallery({ carDetail }: Props) {
                             <img
                                 src={img.imageUrl}
                                 alt={`Car image ${index + 1}`}
-                                className="w-full h-[500px] object-cover rounded-xl"
+                                className="w-full sm:[h-200] md:h-[350px] lg:h-[500px] object-cover rounded-xl"
                             />
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className='left-2 size-5 opacity-0 group-hover:size-8  group-hover:opacity-100 transition-all duration-800'/>
-                <CarouselNext className='right-2 size-5 opacity-0 group-hover:size-8  group-hover:opacity-100 transition-all duration-800'/>
+                <CarouselPrevious className='left-2 size-5 opacity-70 lg:opacity-0 group-hover:size-8  group-hover:opacity-100 transition-all duration-800'/>
+                <CarouselNext className='right-2 size-5 opacity-70 lg:opacity-0 group-hover:size-8  group-hover:opacity-100 transition-all duration-800'/>
             </Carousel>
         </div>
     );
