@@ -34,7 +34,7 @@ function ImageGallery({ carDetail }: Props) {
                             <img
                                 src={img.imageUrl}
                                 alt={`Car image ${index + 1}`}
-                                className="w-full sm:[h-200] md:h-[350px] lg:h-[500px] object-cover rounded-xl"
+                                className="w-full sm:[h-250] md:h-[300px] lg:h-[500px] object-cover rounded-xl"
                             />
                         </CarouselItem>
                     ))}

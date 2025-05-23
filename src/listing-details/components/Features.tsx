@@ -21,7 +21,7 @@ function Features({ features }: featu) {
           grid-cols-1 
           sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 
           sm:max-h-none 
-          max-h-[800px] overflow-y-auto
+          max-h-[400px] overflow-y-auto
         `}
                 >
                     {Object.entries(features).map(([features,value])=>(
