@@ -19,7 +19,7 @@ function ImageGallery({ carDetail }: Props) {
         <div>
           <img
             src={carDetail?.images[0]?.imageUrl}
-            className="w-full h-[500px] object-cover rounded-xl"
+            className="w-full h-[300px] md:h-[500px] object-cover rounded-xl"
           />
         </div>
       );
