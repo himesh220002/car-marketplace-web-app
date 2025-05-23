@@ -29,7 +29,7 @@ function Footer() {
           </li>
 
           <li>
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> History </a>
+            <a className="text-gray-700 transition hover:text-gray-700/75" href="https://himesh220002.github.io/My-Portfolio/"> Contacts </a>
           </li>
 
           <li>
