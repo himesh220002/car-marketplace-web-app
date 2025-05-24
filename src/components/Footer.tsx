@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 function Footer() {
 
-  
+
   return (
     <footer className="bg-gray-100 ">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
@@ -20,33 +20,48 @@ function Footer() {
         </p>
 
         <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
-          <li>
+          <li className="relative group">
             <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> About </a>
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+              #
+            </span>
           </li>
 
-          <li>
+          <li className="relative group">
             <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Careers </a>
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+              #
+            </span>
           </li>
 
-          <li>
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="https://himesh220002.github.io/My-Portfolio/#contact"> Contacts </a>
+          <li className="relative group">
+            <a className="text-gray-700 transition hover:text-gray-700/75" href="https://himesh220002.github.io/My-Portfolio/#contact" target="_blank"> Contacts </a>
+            <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+              https://himesh220002.github.io/My-Portfolio/#contact
+            </span>
           </li>
 
-          <li>
+          <li className="relative group">
             <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Services </a>
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+              #
+            </span>
           </li>
 
-          <li>
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Projects </a>
+          <li className="relative group">
+            <a className="text-gray-700 transition hover:text-gray-700/75" href="https://himesh220002.github.io/My-Portfolio/" target="_blank"> Portfolio </a>
+            <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+              https://himesh220002.github.io/My-Portfolio/
+            </span>
           </li>
 
-          <li>
+          {/* <li>
             <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Blog </a>
-          </li>
+          </li> */}
         </ul>
 
         <ul className="mt-12 flex justify-center gap-6 md:gap-8">
-          <li>
+          <li className="relative group">
             <a
               href="#"
               rel="noreferrer"
@@ -62,9 +77,13 @@ function Footer() {
                 />
               </svg>
             </a>
+            {/* Tooltip to show link on hover  */}
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+              #
+            </span>
           </li>
 
-          <li>
+          <li className="relative group">
             <a
               href="#"
               rel="noreferrer"
@@ -80,9 +99,12 @@ function Footer() {
                 />
               </svg>
             </a>
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+              #
+            </span>
           </li>
 
-          <li>
+          <li className="relative group">
             <a
               href="#"
               rel="noreferrer"
@@ -96,11 +118,14 @@ function Footer() {
                 />
               </svg>
             </a>
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+              #
+            </span>
           </li>
 
-          <li>
+          <li className="relative group">
             <a
-              href="#"
+              href="https://github.com/himesh220002/"
               rel="noreferrer"
               target="_blank"
               className="text-gray-700 transition hover:text-gray-700/75"
@@ -114,16 +139,20 @@ function Footer() {
                 />
               </svg>
             </a>
+             {/* Tooltip to show link on hover  */}
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+              https://github.com/himesh220002/
+            </span>
           </li>
 
-          <li>
+          <li className="relative group">
             <a
-              href="#"
+              href="https://himesh220002.github.io/My-Portfolio/"
               rel="noreferrer"
               target="_blank"
               className="text-gray-700 transition hover:text-gray-700/75"
             >
-              <span className="sr-only">Dribbble</span>
+              <span className="sr-only">Portfolio</span>
               <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fillRule="evenodd"
@@ -132,6 +161,9 @@ function Footer() {
                 />
               </svg>
             </a>
+            <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+              https://himesh220002.github.io/My-Portfolio/
+            </span>
           </li>
         </ul>
       </div>

@@ -37,12 +37,13 @@ function MostSearchedCar() {
     }
 
     return (
-        <div className='mx-24 hidden md:block'>
+        <div className='mx-20 md:mx-24 '>
             <h2 className='font-bold text-3xl text-center mt-16 mb-7'>Most Searched Car</h2>
             <Carousel className=''>
                 <CarouselContent >
-                    {carList.map((car, index) => (
-                        <CarouselItem key={index} className='basis-1/2 md:basis-1/3 lg:basis-1/4 '>
+                    {carList.sort(() => Math.random() - 0.5)
+                    .map((car, index) => (
+                        <CarouselItem key={index} className='grid grid-cols-1 md:basis-1/3 lg:basis-1/4 '>
                             <CarItem car={car} key={index} />
                         </CarouselItem>
 
