@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "test": "vitest",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "db:generate": "drizzle-kit generate",
@@ -55,6 +56,8 @@
   "devDependencies": {
     "@eslint/js": "^9.27.0",
     "@faker-js/faker": "^9.7.0",
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/react": "16.3.0",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
     "@types/react": "^19.1.4",
@@ -68,8 +71,10 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
+    "jsdom": "26.1.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.32.1",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "vitest": "3.2.2"
   }
 }

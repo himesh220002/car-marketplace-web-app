@@ -32,10 +32,10 @@ const [price, setPrice] = useState<string | undefined>();
                     <SelectValue placeholder="Car" />
                 </SelectTrigger>
                 <SelectContent>
-                {data.Type.map((type,_index)=>(
-                        <SelectItem value={type.name}>{type.name}</SelectItem>
+                {data.Type.map((type, index)=>(
+                        <SelectItem key={type.name || index} value={type.name}>{type.name}</SelectItem>
                     ))}
-                <SelectItem value="all">All Cars</SelectItem>
+                <SelectItem key="all-cars" value="all">All Cars</SelectItem>
                     
                 </SelectContent>
             </Select>
@@ -46,10 +46,10 @@ const [price, setPrice] = useState<string | undefined>();
                 </SelectTrigger>
                 <SelectContent>
                 
-                    {data.CarMakes.map((maker,_index)=>(
-                        <SelectItem value={maker.name}>{maker.name}</SelectItem>
+                    {data.CarMakes.map((maker, index)=>(
+                        <SelectItem key={maker.name || index} value={maker.name}>{maker.name}</SelectItem>
                     ))}
-                    <SelectItem value="all">All Car Makers</SelectItem>
+                    <SelectItem key="all-car-makes" value="all">All Car Makers</SelectItem>
                     
                 </SelectContent>
             </Select>
@@ -63,10 +63,10 @@ const [price, setPrice] = useState<string | undefined>();
                     <SelectValue placeholder={isOpen ? "Pricing(<=)" : "Pricing"} />
                 </SelectTrigger>
                 <SelectContent>
-                {data.Pricing.map((Price,_index)=>(
-                        <SelectItem value={Price.amount}>{Price.amount}</SelectItem>
+                {data.Pricing.map((Price, index)=>(
+                        <SelectItem key={Price.amount || index} value={Price.amount.toString()}>{Price.amount}</SelectItem>
                     ))}
-                <SelectItem value="all">All Pricing</SelectItem>
+                <SelectItem key="all-pricing" value="all">All Pricing</SelectItem>
 
                 </SelectContent>
             </Select>

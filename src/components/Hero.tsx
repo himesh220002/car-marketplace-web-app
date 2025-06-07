@@ -3,7 +3,6 @@ import Search from './Search'
 import './Css/hero.css'
 
 function Hero() {
-    // bg-[#eef0fc] 
 
     
     return (
@@ -18,16 +17,12 @@ function Hero() {
                 <Search />
 
 
-                <img src='/bmw1.png' className='mt-5 w-180 z-20 ' />
+                <img src='/bmw1.png' alt="BMW car" className='mt-5 w-[180px] z-20 ' />
 
                 {/* Moving Car (animated below BMW but above bg) */}
                 
-                    {/* Ring icons at 5% and 90% positions (optional) */}
-                    {/* <img src="/black-hole-png.png" className="absolute left-[-20px] bottom-0 w-[90px] z-10" /> */}
-                    {/* <img src="/black-hole-png.png" className="absolute left-[94%] bottom-0 w-[90px] opacity-50 z-10" /> */}
-
                     {/* Moving Car */}
-                    <img src="/cpng.png" alt="car" className="hidden sm:block car-slide" />
+                    <img src="/cpng.png" alt="Animated car illustration" className="hidden sm:block car-slide" />
                 
 
             </div>

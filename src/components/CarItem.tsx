@@ -20,10 +20,12 @@ import { Link } from 'react-router-dom';
         <Link to={'/listing-details/'+car?.id}>
         <div className='rounded-xl bg-white border hover:shadow-md cursor-pointer'>
             <h2 className='absolute m-2 bg-green-500 px-2 rounded-full text-sm text-white '>New</h2>
-            <img src={car?.images[0]?.imageUrl} width={'100%'} height={250}
+            <img src={car?.images[0]?.imageUrl}
+             alt={car?.listingTitle || 'Car image'}
+             width={'100%'} height={250}
              className='rounded-t-xl h-[180px] object-cover' 
              onError={(e) => {
-                // e.currentTarget.onerror = null; // prevent infinite loop
+                e.currentTarget.onerror = null; // prevent infinite loop
                 e.currentTarget.src = "/st_road.jpg"; // fallback image from public folder
                 e.currentTarget.classList.add("opacity-70"); // Optional effect
                 }}

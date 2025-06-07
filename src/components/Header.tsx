@@ -6,9 +6,6 @@ import './Css/header.css';
 function Header() {
   const { user, isSignedIn } = useUser();
   const location = useLocation(); // Get current page path
-  if(!user){
-  console.log("user : ",user);
-}
 
   
   return (
@@ -20,8 +17,8 @@ function Header() {
         <ul className="hidden md:flex gap-10">
           {[
             { name: "Home", path: "/" },
-            { name: "New", path: "#" },
-            { name: "Preowned", path: "#" },
+            { name: "New", path: "/search/new" },
+            { name: "Preowned", path: "/search/preowned" },
           ].map((item) => (
             <li key={item.path} className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-blue-700">
               <a href={item.path} className={`relative ${location.pathname === item.path ? "active" : ""}`}>
