@@ -12,11 +12,21 @@ import { Toaster } from 'sonner'
 import SearchByCategory from './search/[category]'
 import SearchByOptions from './search'
 import ListingDetail from './listing-details/[id]'
+import New from './components/New'
+import PreOwned from './components/PreOwned'
 
 const router=createBrowserRouter([
   {
     path: '/',
     element: <Home/>
+  },
+  {
+    path: '/New',
+    element: <New />
+  },
+  {
+    path: '/PreOwned',
+    element: <PreOwned />
   },
   {
     path: '/contact',
