@@ -21,37 +21,6 @@ A modern full-stack car listing marketplace built using **React**, **TypeScript*
 
 ---
 
-## ⚙️ Project Structure
-
-car-marketplace/
-├── configs/ # Configuration files
-├── dataconnect/ # Data connectors
-├── dataconnect-generated/ # Auto-generated DB connectors
-├── drizzle/ # Drizzle ORM migrations/schemas
-├── public/ # Static assets
-├── src/ # Main application source
-│ ├── components/ # UI Components
-│ ├── assets/ # Images & Icons
-│ ├── shared/ # Shared types or configs
-│ ├── utils/ # Utility functions
-│ ├── add-listing/ # Add car listings
-│ ├── listing-details/ # View listing
-│ ├── profile/ # User profiles
-│ ├── search/ # Search page
-│ ├── contact.tsx # Contact page
-│ ├── home.tsx # Homepage
-│ ├── main.tsx # App Entry
-│ └── index.css # Global styles
-├── drizzle.config.ts # Drizzle ORM config
-├── firebase.json # Firebase hosting config
-├── storage.rules # Firebase storage rules
-├── tailwind.config.ts # Tailwind setup
-├── vite.config.ts # Vite bundler config
-├── package.json # Project metadata & scripts
-└── README.md # You're reading this
-
-
----
 
 ## 🚀 Features
 
