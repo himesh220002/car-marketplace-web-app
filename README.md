@@ -51,16 +51,16 @@ npm install
 🔑 Environment Setup
 Create a .env file in the root with:
 
-DATABASE_URL=postgres://user:password@localhost:5432/car_marketplace
-CLOUDINARY_CLOUD_NAME=your_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_secret  
+DATABASE_URL=postgres://user:password@localhost:5432/car_marketplace  
+CLOUDINARY_CLOUD_NAME=your_name  
+CLOUDINARY_API_KEY=your_api_key  
+CLOUDINARY_API_SECRET=your_secret    
 
-`bash`
-npm run dev         # Start Vite dev server
-npm run build       # Production build
-npm run preview     # Preview build
-npm run lint        # Lint project
+`bash`  
+npm run dev        &nbsp; # Start Vite dev server  
+npm run build      &nbsp; # Production build  
+npm run preview    &nbsp; # Preview build  
+npm run lint       &nbsp; # Lint project
 
 
 | Command       | Description               |
@@ -71,8 +71,8 @@ npm run lint        # Lint project
 | `db:check`    | Validate schema vs DB     |
 | `db:migrate`  | Apply migrations          |
 
-`bash`
-npm run db:push
+`bash`  
+npm run db:push  
 npm run db:studio
 
 
