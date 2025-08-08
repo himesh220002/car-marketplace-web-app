@@ -1,50 +1,44 @@
-#🤝 Contributing
-##🧩 Steps to Contribute
-Fork the repository
+# 🤝 Contributing
+## 🧩 Steps to Contribute
 
-Clone your fork:
-git clone https://github.com/himesh220002/car-marketplace.git
+1. ***Fork the repository***
 
-Create a branch:
-git checkout -b feat/your-feature-name
+2. ***Clone your fork***:  git clone https://github.com/himesh220002/car-marketplace-web-app.git
 
-Make your changes
+3. ***Create a branch***:  git checkout -b feat/your-feature-name
 
-Commit: git commit -m "feat: add dark mode toggle"
-Push:
-git push origin feat/your-feature-name
+4. ***Make your changes***
 
-Create a Pull Request on GitHub
+5. ***Commit***:  git commit -m "feat: add dark mode toggle"
 
- Contribution Rules
-✅ Use conventional commits (feat:, fix:, docs:)
+6. ***Push***:  git push origin feat/your-feature-name
 
-✅ Use eslint and prettier (auto-run via pre-commit hooks)
+7. ***Create a Pull Request on GitHub***
 
-✅ Link issues in your PR description
-
-❌ Don't commit node_modules, .env, or build files
+ ## Contribution Rules
+✅ Use conventional commits (feat:, fix:, docs:)   
+✅ Use eslint and prettier (auto-run via pre-commit hooks)   
+✅ Link issues in your PR description   
+❌ Don't commit node_modules, .env, or build files   
 
 
 
-📜 License
+📜 ***License***  
 This project is licensed under the MIT License.
 
-🤝 Maintainers
-@yourusername
-
+🤝***Maintainers***  
+@yourusername  
 @contributors
 
-🔐 Security
+🔐 ***Security***  
 Please report security issues via security.md.
 We take privacy and security very seriously.
 
-💬 Discussions
+💬 ***Discussions***  
 Join the conversation in the GitHub Discussions.
 
-🙌 Acknowledgements
+🙌 ***Acknowledgements***  
 Inspired by open source projects like:
 
-AutoTrader
-
+AutoTrader  
 Carvana
