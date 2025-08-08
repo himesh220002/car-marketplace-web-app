@@ -3,7 +3,7 @@
 Fork the repository
 
 Clone your fork:
-git clone https://github.com/yourname/car-marketplace.git
+git clone https://github.com/himesh220002/car-marketplace.git
 
 Create a branch:
 git checkout -b feat/your-feature-name
@@ -18,8 +18,11 @@ Create a Pull Request on GitHub
 
  Contribution Rules
 ✅ Use conventional commits (feat:, fix:, docs:)
+
 ✅ Use eslint and prettier (auto-run via pre-commit hooks)
+
 ✅ Link issues in your PR description
+
 ❌ Don't commit node_modules, .env, or build files
 
 
@@ -29,6 +32,7 @@ This project is licensed under the MIT License.
 
 🤝 Maintainers
 @yourusername
+
 @contributors
 
 🔐 Security
@@ -42,4 +46,5 @@ Join the conversation in the GitHub Discussions.
 Inspired by open source projects like:
 
 AutoTrader
+
 Carvana
