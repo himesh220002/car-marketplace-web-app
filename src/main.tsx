@@ -77,7 +77,7 @@ createRoot(document.getElementById('root')!).render(
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
       {/* <ClerkLoaded> */}
       <RouterProvider router={router} />
-  <ChatFloating />
+      <ChatFloating />
       <Toaster />
       {/* </ClerkLoaded> */}
     </ClerkProvider>

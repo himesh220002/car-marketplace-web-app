@@ -1,3 +1,4 @@
+// src/components/ChatFloating.tsx
 import React, { useEffect, useRef, useState } from 'react'
 import { FiMessageSquare } from 'react-icons/fi'
 import { useUser } from '@clerk/clerk-react'

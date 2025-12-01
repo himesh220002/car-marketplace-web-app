@@ -1,9 +1,11 @@
+//src/profile/components/Inbox.tsx
 import { useEffect, useState } from 'react'
 import { SendBirdProvider } from '@sendbird/uikit-react';
 import '@sendbird/uikit-react/dist/index.css';
 import { useUser } from '@clerk/clerk-react';
 import { GroupChannelList } from '@sendbird/uikit-react/GroupChannelList';
 import { GroupChannel } from '@sendbird/uikit-react/GroupChannel';
+import Service from '@/Shared/Service';
 
 
 
@@ -11,27 +13,51 @@ function Inbox() {
   const { user } = useUser();
   const [userId, setUserId] = useState<string>();
   const [channelUrl, setChannelUrl] = useState<string>();
+  const [accessToken, setAccessToken] = useState<string | undefined>();
 
   useEffect(() => {
     if (user) {
       const raw = (user.primaryEmailAddress?.emailAddress) ?? '';
       // derive a safe sendbird-friendly id (remove spaces and @domain part)
       const id = raw.split('@')[0].replace(/\s+/g, '_');
-      setUserId(id || undefined);
+      setUserId(id);
 
       // Log for debugging SendBird init issues (will appear in browser console)
       // Avoid printing secrets here — only surface non-sensitive values.
-       
+
+      // setUserId(user.id);
+
       console.debug('[Inbox] derived userId for SendBird:', id);
+      // Try to create / fetch the user and obtain a user access token from SendBird.
+      (async () => {
+        try {
+          // Service returns an object that may contain access_token in several shapes.
+          const resp = await Service.CreateSendBirdUser(id, user?.fullName ?? 'Unknown User', user?.imageUrl ?? '');
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const token = (resp as any)?.access_token ?? (resp as any)?.data?.access_token ?? (resp as any)?.accessToken;
+          if (token) {
+            setAccessToken(token);
+            console.debug('[Inbox] obtained SendBird user access token (masked):', String(token).slice(0, 8) + '...');
+          }
+        } catch (e) {
+          console.error('[Inbox] could not obtain SendBird user token:', e);
+        }
+      })();
 
     }
   }, [user])
 
-  if (!userId) return null;
+  if (!userId) {
+    // Provide a small visible hint in the UI so developers/users can see why chat isn't rendering.
+    if (!user) {
+      return <div className="p-4 text-sm text-gray-700">Please sign in to access messages.</div>;
+    }
+    return <div className="p-4 text-sm text-gray-700">Preparing chat — no SendBird user id yet.</div>;
+  }
 
   const sbAppId = import.meta.env.VITE_SENDBIRD_APP_ID;
   if (!sbAppId) {
-     
+
     console.error('[Inbox] Missing VITE_SENDBIRD_APP_ID — SendBird UI will not initialize.');
     return <div className="p-4 text-sm text-red-600">Chat is not configured.</div>;
   }
@@ -45,7 +71,7 @@ function Inbox() {
           nickname={user?.fullName ?? "Unknown User"}
           profileUrl={user?.imageUrl ?? "https://res.cloudinary.com/dbcx5bxea/image/upload/v1747459046/alt_user_qoqovf.avif"}
           allowProfileEdit={true}
-          accessToken={import.meta.env.VITE_SENDBIRD_ACCESS_TOKEN}
+          accessToken={accessToken}
 
           imageCompression={{
             compressionRate: 0.5,
