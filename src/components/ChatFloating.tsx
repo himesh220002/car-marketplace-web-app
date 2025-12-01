@@ -22,7 +22,8 @@ const ChatFloating: React.FC = () => {
   const startRef = useRef<{x:number,y:number}|null>(null)
 
   // derive sendbird user id from clerk user (same as Inbox)
-  const userId = user ? (user.primaryEmailAddress?.emailAddress ?? '').split('@')[0] : undefined
+  const rawEmail = user ? (user.primaryEmailAddress?.emailAddress ?? '') : ''
+  const userId = rawEmail ? rawEmail.split('@')[0].replace(/\s+/g, '_') : undefined
 
   useEffect(() => {
     if (!isSignedIn) return
@@ -61,7 +62,14 @@ const ChatFloating: React.FC = () => {
     }
   }, [dragging])
 
-  if (!isSignedIn || !userId) return null
+  const sbAppId = import.meta.env.VITE_SENDBIRD_APP_ID
+  if (!isSignedIn || !userId || !sbAppId) {
+    if (!sbAppId) {
+       
+      console.warn('[ChatFloating] VITE_SENDBIRD_APP_ID missing — hiding chat widget.');
+    }
+    return null
+  }
 
   return (
     <div
@@ -92,7 +100,7 @@ const ChatFloating: React.FC = () => {
       {open && (
         <div className="mt-2 w-[360px] h-[560px] bg-white rounded-xl shadow-xl overflow-hidden">
           <SendBirdProvider
-            appId={import.meta.env.VITE_SENDBIRD_APP_ID}
+            appId={sbAppId}
             userId={userId}
             nickname={user?.fullName ?? 'Unknown User'}
             profileUrl={user?.imageUrl ?? ''}

@@ -14,31 +14,45 @@ function Inbox() {
 
   useEffect(() => {
     if (user) {
-      const id = (user.primaryEmailAddress?.emailAddress)?.split('@')[0];
-      setUserId(id);
+      const raw = (user.primaryEmailAddress?.emailAddress) ?? '';
+      // derive a safe sendbird-friendly id (remove spaces and @domain part)
+      const id = raw.split('@')[0].replace(/\s+/g, '_');
+      setUserId(id || undefined);
+
+      // Log for debugging SendBird init issues (will appear in browser console)
+      // Avoid printing secrets here — only surface non-sensitive values.
+       
+      console.debug('[Inbox] derived userId for SendBird:', id);
 
     }
   }, [user])
 
   if (!userId) return null;
 
+  const sbAppId = import.meta.env.VITE_SENDBIRD_APP_ID;
+  if (!sbAppId) {
+     
+    console.error('[Inbox] Missing VITE_SENDBIRD_APP_ID — SendBird UI will not initialize.');
+    return <div className="p-4 text-sm text-red-600">Chat is not configured.</div>;
+  }
+
   return (
     <div className='bg-orange-100 p-0  md:px-4 md:py-2'>
       <div style={{ width: '100%', height: '100vh' }}>
         <SendBirdProvider
-          appId={import.meta.env.VITE_SENDBIRD_APP_ID}
+          appId={sbAppId}
           userId={userId}
           nickname={user?.fullName ?? "Unknown User"}
           profileUrl={user?.imageUrl ?? "https://res.cloudinary.com/dbcx5bxea/image/upload/v1747459046/alt_user_qoqovf.avif"}
           allowProfileEdit={true}
-        // accessToken={import.meta.env.VITE_SENDBIRD_ACCESS_TOKEN}
+          accessToken={import.meta.env.VITE_SENDBIRD_ACCESS_TOKEN}
 
-        imageCompression={{
-                compressionRate: 0.5,
-                // The default value changed from 1.0 to 0.7 starting in v3.3.3.
-                resizingWidth: 200,
-                resizingHeight: '200px',
-            }}
+          imageCompression={{
+            compressionRate: 0.5,
+            // The default value changed from 1.0 to 0.7 starting in v3.3.3.
+            resizingWidth: 200,
+            resizingHeight: 200,
+          }}
 
         >
           <div className='grid grid-cols-1 lg:flex gap-1 md:gap-2 h-full '>

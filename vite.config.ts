@@ -12,13 +12,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Define global constants for test environment
-  // This will replace import.meta.env.VITE_SENDBIRD_APP_ID with "test-app-id"
-  // and import.meta.env.VITE_SENDBIRD_API_TOKEN with "test-api-token"
-  define: {
-    'import.meta.env.VITE_SENDBIRD_APP_ID': JSON.stringify('test-app-id'),
-    'import.meta.env.VITE_SENDBIRD_API_TOKEN': JSON.stringify('test-api-token'),
-  },
+
   test: {
     globals: true,
     environment: 'jsdom',
