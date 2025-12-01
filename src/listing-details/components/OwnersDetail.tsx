@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from '@/components/ui/button'
 import Service from '@/Shared/Service'
 import { useUser } from '@clerk/clerk-react'
@@ -33,7 +34,9 @@ function OwnersDetail({carDetail}: any) {
         .then(resp=>{
           console.log(resp);
         })
-      }catch(e){}
+      } catch {
+        // ignore creation error
+      }
     
     //Owner User ID
     try{
@@ -45,7 +48,9 @@ function OwnersDetail({carDetail}: any) {
           console.log(resp);
         })
       
-    }catch(e){}
+    } catch {
+      // ignore creation error
+    }
     
     //Create Channel
     try{
@@ -55,7 +60,9 @@ function OwnersDetail({carDetail}: any) {
         console.log("Channel Created");
         navigation('/profile');
       })
-    }catch(e){}
+    } catch {
+      // ignore channel creation error
+    }
 
   }
 

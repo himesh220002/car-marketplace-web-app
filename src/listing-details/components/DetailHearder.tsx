@@ -10,16 +10,29 @@ import { RiChargingPileFill } from "react-icons/ri";
 import { GiPathDistance } from "react-icons/gi";
 
 
+type CarDetailPreview = {
+    make?: string;
+    listingTitle?: string;
+    tagline?: string | null;
+    category?: string;
+    year?: string | number | null;
+    mileage?: string | number | null;
+    transmission?: string | null;
+    fuelType?: string | null;
+    type?: string | null;
+    distanceTravelled?: string | number | null;
+        [k: string]: unknown;
+};
+
 type props = {
-    carDetail: any
-    
+        carDetail?: CarDetailPreview | null;
 }
 
 function DetailHearder({ carDetail }: props) {
     const carengine = (carDetail?.fuelType == 'Electric') ? 'Km' : 'Km';
 
-    const getCategoryImage = (category : string) => {
-        switch (category) {
+    const getCategoryImage = (category?: string) => {
+            switch (category) {
             case 'SUV':
                 return '/suv-car.png';
             case 'Sedan':
@@ -44,8 +57,8 @@ function DetailHearder({ carDetail }: props) {
                 return '/coupe.png';
         }
     };
-    const getMakeLogo = (make : string) => {
-        switch (make) {
+    const getMakeLogo = (make?: string) => {
+            switch (make) {
             case 'Toyota':
                 return '/Company Logos/toyotalogo.png';
             case 'Honda':

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import axios from 'axios'; // Actual axios is mocked by vi.mock below
 
@@ -36,9 +37,9 @@ describe('Service', () => {
 
     it('should log an error and return undefined if user check fails with an Error (e.g. 404)', async () => {
       const getError = new Error('User not found');
-      // @ts-ignore
+  // @ts-ignore
       getError.isAxiosError = true;
-      // @ts-ignore
+  // @ts-ignore
       getError.response = { status: 404, data: { message: 'User not found' } };
       mockedAxios.get.mockRejectedValue(getError);
 
@@ -194,9 +195,9 @@ describe('Service', () => {
 
     it('should skip items with missing carListing or id', () => {
       const input = [
-        // @ts-ignore testing invalid input
+  // @ts-ignore testing invalid input
         { carImages: { url: 'image_only.jpg' } },
-        // @ts-ignore testing invalid input
+  // @ts-ignore testing invalid input
         { carListing: { make: 'Subaru', model: 'Outback' } },
         { carListing: { id: 1, make: 'Mazda', model: 'CX-5' }, carImages: { url: 'mazda1.jpg' } },
       ];
@@ -208,7 +209,7 @@ describe('Service', () => {
       const input = [
         { carListing: { id: 1, make: 'Nissan', model: 'Rogue' }, carImages: { url: 'nissan1.jpg' } },
         { carListing: { id: 1, make: 'Nissan', model: 'Rogue' }, carImages: null },
-        // @ts-ignore testing potentially undefined property
+  // @ts-ignore testing potentially undefined property
         { carListing: { id: 1, make: 'Nissan', model: 'Rogue' }, carImages: undefined },
         { carListing: { id: 2, make: 'Kia', model: 'Sportage' } , carImages: null},
       ];

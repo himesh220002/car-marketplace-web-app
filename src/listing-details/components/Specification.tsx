@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import IconField from '@/add-listing/components/IconField'
 import CarSpecification from '@/Shared/CarSpecification'
 import {useState} from 'react'

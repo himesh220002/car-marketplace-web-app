@@ -31,7 +31,7 @@ type CarDetailType = {
   mileage: number;
   features?: Feature[];  // <-- Correctly typed features
   images: { imageUrl: string }[];
-  [key: string]: any;
+    [key: string]: unknown;
 };
 
 function ListingDetail() {
@@ -53,7 +53,7 @@ function ListingDetail() {
         const resp = Service.FormatResult(result);
         console.log("CarDetails: ",resp);
         
-        setCarDetail(resp[0] as any);
+    setCarDetail(resp[0] as CarDetailType | undefined);
     }
 
     return (

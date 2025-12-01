@@ -1,14 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { db } from '../configs/index'; // Import your Drizzle DB instance
 import { CarListing } from '../configs/schema'; // Import your schema (adjust the path)
-
-interface Listing {
-    id: number;
-    title: string;
-    description: string;
-    images: string[];
-    features?: string[]; // Optional features
-}
-
 
 export const fetchListings = async () => {
     try {
@@ -16,9 +8,9 @@ export const fetchListings = async () => {
         // console.log("Fetched Listings:", listings); 
         return listings.map((listing) => ({
             id: listing.id,
-            title: listing.title,
+            title: listing.listingTitle ?? (listing as any).title,
             description: listing.description,
-            images: listing.images,
+            images: (listing as any).images ?? [],
             features: listing.features,
         })); // Returns an array of listings
     } catch (error) {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import React from 'react'
 import { Separator } from './ui/separator'
 import { BsFillFuelPumpFill } from "react-icons/bs";
@@ -10,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 
   
-  function CarItem({ car }: any) {
+    function CarItem({ car }: any) {
 
     const engineType = (car?.fuelType == 'Electric' )? ' Km' : ' Km';
 

@@ -7,6 +7,9 @@ import {
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
 
+/* eslint-disable react/prop-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 interface DropdownFieldProps {
   item: {
     name: string;

@@ -1,4 +1,5 @@
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 
 // const SendBirdApplicationId = import.meta.env.VITE_SENDBIRD_APP_ID; // Moved into functions
@@ -11,15 +12,16 @@ type CarListing = {
 };
 
 type ResponseItem = {
-    carListing?: CarListing;
+    // carListing may sometimes be missing fields in tests; allow partial listing
+    carListing?: Partial<CarListing> | undefined;
     carImages?: any | null;
 };
 
 
 
 const FormatResult = (resp: ResponseItem[]): CarListing[] => {
-    let result: Record<number, { car: CarListing; images: any[] }> = {};
-    let finalResult: CarListing[] = [];
+    const result: Record<number, { car: CarListing; images: any[] }> = {};
+    const finalResult: CarListing[] = [];
 
     resp.forEach((item) => {
         const listingId = item.carListing?.id;
@@ -27,7 +29,7 @@ const FormatResult = (resp: ResponseItem[]): CarListing[] => {
 
         if (!result[listingId]) {
             result[listingId] = {
-                car: item?.carListing,
+                car: item?.carListing as CarListing,
                 images: []
             };
         }

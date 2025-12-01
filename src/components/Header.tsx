@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './Css/header.css';
 
 function Header() {
-  const { user, isSignedIn } = useUser();
+  const { isSignedIn } = useUser();
   const location = useLocation(); // Get current page path
 
   
