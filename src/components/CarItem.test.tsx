@@ -46,7 +46,7 @@ describe('CarItem Component', () => {
     expect(screen.getByAltText(mockCar.listingTitle)).toBeInTheDocument();
 
     // Check for mileage and fuel type combination
-    expect(screen.getByText(`${mockCar.mileage} Km/L`)).toBeInTheDocument(); // Petrol car
+    expect(screen.getByText(`${mockCar.mileage} Km`)).toBeInTheDocument(); // Petrol car
     expect(screen.getByText(mockCar.fuelType)).toBeInTheDocument();
 
     // Check for transmission

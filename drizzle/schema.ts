@@ -1,5 +1,5 @@
 import { pgTable, serial, varchar, json, foreignKey, integer } from "drizzle-orm/pg-core"
-import { sql } from "drizzle-orm"
+// import { sql } from "drizzle-orm"
 
 
 

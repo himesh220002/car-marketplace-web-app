@@ -12,6 +12,9 @@ import { Toaster } from 'sonner'
 import SearchByCategory from './search/[category]'
 import SearchByOptions from './search'
 import ListingDetail from './listing-details/[id]'
+import ChatFloating from './components/ChatFloating'
+import NewCars from './new'
+import PreOwned from './preowned'
 
 const router=createBrowserRouter([
   {
@@ -21,6 +24,14 @@ const router=createBrowserRouter([
   {
     path: '/contact',
     element: <Contact/>
+  },
+  {
+    path: '/new',
+    element: <NewCars />
+  },
+  {
+    path: '/preowned',
+    element: <PreOwned />
   },
   {
     path: '/profile',
@@ -66,6 +77,7 @@ createRoot(document.getElementById('root')!).render(
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
       {/* <ClerkLoaded> */}
       <RouterProvider router={router} />
+  <ChatFloating />
       <Toaster />
       {/* </ClerkLoaded> */}
     </ClerkProvider>

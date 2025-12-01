@@ -99,7 +99,7 @@ const CarMakes = [
     },
     {
         id: 15,
-        name: "New_Temprory"
+        name: "New_temporary"
     },
 ]
 

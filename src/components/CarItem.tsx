@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
   
   function CarItem({ car }: any) {
 
-    const engineType = (car?.fuelType == 'Electric' )? ' Km' : ' Km/L';
+    const engineType = (car?.fuelType == 'Electric' )? ' Km' : ' Km';
 
     
 
@@ -36,11 +36,12 @@ import { Link } from 'react-router-dom';
 
                 <div className='grid grid-cols-3 mt-5'>
                     <div className='flex flex-col items-center'>
-                        <BsFillFuelPumpFill  className='text-lg mb-2'/>
+                        <IoIosSpeedometer  className='text-lg mb-2'/>
                         <h2>{car?.mileage}{engineType}</h2>
                     </div>
                     <div className='flex flex-col items-center'>
-                        <IoIosSpeedometer  className='text-lg mb-2'/>
+                        <BsFillFuelPumpFill  className='text-lg mb-2'/>
+
                         <h2>{car?.fuelType} </h2>
                     </div>
                     <div className='flex flex-col items-center'>

@@ -35,7 +35,7 @@ function Footer() {
           </li>
 
           <li className="relative group">
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="https://himesh220002.github.io/My-Portfolio/#contact" target="_blank"> Contacts </a>
+            <a className="text-gray-700 transition hover:text-gray-700/75" href="https://himesh220002.github.io/My-Portfolio/#contact" target="_blank" rel="noopener noreferrer"> Contacts </a>
             <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
               https://himesh220002.github.io/My-Portfolio/#contact
             </span>
@@ -49,7 +49,7 @@ function Footer() {
           </li>
 
           <li className="relative group">
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="https://himesh220002.github.io/My-Portfolio/" target="_blank"> Portfolio </a>
+            <a className="text-gray-700 transition hover:text-gray-700/75" href="https://himesh220002.github.io/My-Portfolio/" target="_blank" rel="noopener noreferrer"> Portfolio </a>
             <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
               https://himesh220002.github.io/My-Portfolio/
             </span>
@@ -142,7 +142,7 @@ function Footer() {
                 />
               </svg>
             </a>
-             {/* Tooltip to show link on hover  */}
+            {/* Tooltip to show link on hover  */}
             <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
               https://github.com/himesh220002/
             </span>
