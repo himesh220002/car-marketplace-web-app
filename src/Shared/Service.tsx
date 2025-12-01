@@ -1,8 +1,8 @@
 
 import axios from "axios";
 
-const SendBirdApplicationId = import.meta.env.VITE_SENDBIRD_APP_ID;
-const SendBirdApiToken = import.meta.env.VITE_SENDBIRD_API_TOKEN;
+// const SendBirdApplicationId = import.meta.env.VITE_SENDBIRD_APP_ID; // Moved into functions
+// const SendBirdApiToken = import.meta.env.VITE_SENDBIRD_API_TOKEN; // Moved into functions
 
 type CarListing = {
     id: number;
@@ -48,6 +48,8 @@ const FormatResult = (resp: ResponseItem[]): CarListing[] => {
 };
 
 const CreateSendBirdUser=async(userId:string, nickName:any, profileUrl:string)=>{
+    const SendBirdApplicationId = import.meta.env.VITE_SENDBIRD_APP_ID;
+    const SendBirdApiToken = import.meta.env.VITE_SENDBIRD_API_TOKEN;
     try {
         // First, check if the user already exists in SendBird
         const checkUser = await axios.get(`https://api-${SendBirdApplicationId}.sendbird.com/v3/users/${userId}`, {
@@ -70,7 +72,7 @@ const CreateSendBirdUser=async(userId:string, nickName:any, profileUrl:string)=>
         }
       }
 
-    return axios.post('https://api-'+SendBirdApplicationId+'.sendbird.com/v3/users',{
+    return axios.post(`https://api-${SendBirdApplicationId}.sendbird.com/v3/users`,{ // Template literal for consistency
         user_id: userId,
         nickname: nickName || 'Unknown User',
         profile_url: profileUrl || 'https://res.cloudinary.com/dbcx5bxea/image/upload/v1747459046/alt_user_qoqovf.avif',
@@ -78,13 +80,15 @@ const CreateSendBirdUser=async(userId:string, nickName:any, profileUrl:string)=>
     },{
         headers:{
             'Content-Type': 'application/json',
-            'Api-Token':SendBirdApiToken
+            'Api-Token': SendBirdApiToken
         }
     })
 }
 
 const CreateSendBirdChannel=(users:any,title:any)=>{
-    return axios.post('https://api-'+SendBirdApplicationId+'.sendbird.com/v3/group_channels',{
+    const SendBirdApplicationId = import.meta.env.VITE_SENDBIRD_APP_ID;
+    const SendBirdApiToken = import.meta.env.VITE_SENDBIRD_API_TOKEN;
+    return axios.post(`https://api-${SendBirdApplicationId}.sendbird.com/v3/group_channels`,{ // Template literal for consistency
         user_ids: users,
         is_distinct: true,
         name: title,
@@ -92,7 +96,7 @@ const CreateSendBirdChannel=(users:any,title:any)=>{
     },{
         headers:{
             'Content-Type': 'application/json',
-            'Api-Token':SendBirdApiToken
+            'Api-Token': SendBirdApiToken
         }
     })
 };

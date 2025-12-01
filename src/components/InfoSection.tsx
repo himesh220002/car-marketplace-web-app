@@ -9,7 +9,7 @@ function InfoSection() {
           <div>
             <img
               src="https://res.cloudinary.com/dbcx5bxea/image/upload/v1747133820/Car-marketplace/cyzomwr0104gdel52q9t.webp"
-              className="rounded-xl shadow-2xl border-1 border-amber-50"
+              className="rounded-xl shadow-2xl border border-amber-50"
               alt="Koenigsegg Agera RS"
             />
           </div>

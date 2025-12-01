@@ -52,8 +52,8 @@ return (
         const isMileage = item.name === 'mileage';
         const suffix = isMileage
           ? carDetail.fuelType === 'Electric'
-            ? ' Km/Chrg.'
-            : ' Km/L'
+            ? ' Km'
+            : ' Km'
           : '';
 
         return (

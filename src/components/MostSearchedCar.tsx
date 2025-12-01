@@ -32,7 +32,7 @@ function MostSearchedCar() {
 
 
         const resp = Service.FormatResult(result);
-        console.log(resp);
+        // console.log(resp); // Removed console.log
         setCarList(resp);
     }
 
@@ -41,10 +41,10 @@ function MostSearchedCar() {
             <h2 className='font-bold text-3xl text-center mt-16 mb-7'>Most Searched Car</h2>
             <Carousel className=''>
                 <CarouselContent >
-                    {carList.sort(() => Math.random() - 0.5)
-                    .map((car, index) => (
-                        <CarouselItem key={index} className='grid grid-cols-1 md:basis-1/3 lg:basis-1/4 '>
-                            <CarItem car={car} key={index} />
+                    {carList.sort(() => Math.random() - 0.5) // Random sort kept as per original logic
+                    .map((car, index) => ( // index is still available if car.id is not reliable for some reason before FormatResult
+                        <CarouselItem key={car.id || index} className='grid grid-cols-1 md:basis-1/3 lg:basis-1/4 '>
+                            <CarItem car={car} />
                         </CarouselItem>
 
                     ))}

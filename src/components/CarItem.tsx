@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
   
   function CarItem({ car }: any) {
 
-    const engineType = (car?.fuelType == 'Electric' )? ' Km' : ' Km/L';
+    const engineType = (car?.fuelType == 'Electric' )? ' Km' : ' Km';
 
     
 
@@ -20,10 +20,12 @@ import { Link } from 'react-router-dom';
         <Link to={'/listing-details/'+car?.id}>
         <div className='rounded-xl bg-white border hover:shadow-md cursor-pointer'>
             <h2 className='absolute m-2 bg-green-500 px-2 rounded-full text-sm text-white '>New</h2>
-            <img src={car?.images[0]?.imageUrl} width={'100%'} height={250}
+            <img src={car?.images[0]?.imageUrl}
+             alt={car?.listingTitle || 'Car image'}
+             width={'100%'} height={250}
              className='rounded-t-xl h-[180px] object-cover' 
              onError={(e) => {
-                // e.currentTarget.onerror = null; // prevent infinite loop
+                e.currentTarget.onerror = null; // prevent infinite loop
                 e.currentTarget.src = "/st_road.jpg"; // fallback image from public folder
                 e.currentTarget.classList.add("opacity-70"); // Optional effect
                 }}
@@ -34,11 +36,12 @@ import { Link } from 'react-router-dom';
 
                 <div className='grid grid-cols-3 mt-5'>
                     <div className='flex flex-col items-center'>
-                        <BsFillFuelPumpFill  className='text-lg mb-2'/>
+                        <IoIosSpeedometer  className='text-lg mb-2'/>
                         <h2>{car?.mileage}{engineType}</h2>
                     </div>
                     <div className='flex flex-col items-center'>
-                        <IoIosSpeedometer  className='text-lg mb-2'/>
+                        <BsFillFuelPumpFill  className='text-lg mb-2'/>
+
                         <h2>{car?.fuelType} </h2>
                     </div>
                     <div className='flex flex-col items-center'>

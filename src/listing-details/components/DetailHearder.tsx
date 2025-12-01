@@ -16,7 +16,7 @@ type props = {
 }
 
 function DetailHearder({ carDetail }: props) {
-    const carengine = (carDetail?.fuelType == 'Electric') ? 'Km/Chrg.' : 'Km/L';
+    const carengine = (carDetail?.fuelType == 'Electric') ? 'Km' : 'Km';
 
     const getCategoryImage = (category : string) => {
         switch (category) {
@@ -72,7 +72,7 @@ function DetailHearder({ carDetail }: props) {
                 return '/Company Logos/mahindralogo.png';
             case 'Koenigsegg':
                 return '/Company Logos/koneglogo.png';
-            case 'New_Temprory':
+            case 'New_temporary':
                 return '/Company Logos/defaultcarlogo.png';
             default:
                 return 'defaultcarlogo.png';

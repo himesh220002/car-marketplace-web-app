@@ -1,13 +1,15 @@
+
 import Header from '@/components/Header';
 
 import MyListing from './components/MyListing';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Footer from '@/components/Footer';
 import Inbox from './components/Inbox';
+import ProfileView from './components/ProfileView';
 
 
 function Profile() {
-  
+
 
   return (
     <div>
@@ -18,7 +20,7 @@ function Profile() {
           <TabsList className=''>
             <TabsTrigger value="my-listing" >My Listing</TabsTrigger>
             <TabsTrigger value="inbox" className='relative' >Inbox
-               <span className="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+              <span className="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
             </TabsTrigger>
             <TabsTrigger value="profile" >Profile</TabsTrigger>
           </TabsList>
@@ -27,9 +29,9 @@ function Profile() {
           </TabsContent>
           <TabsContent value="inbox">
             <Inbox />
-            </TabsContent>
+          </TabsContent>
           <TabsContent value="profile">
-            Profile Tab
+            <ProfileView />
           </TabsContent>
         </Tabs>
 

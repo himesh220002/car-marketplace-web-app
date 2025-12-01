@@ -81,7 +81,7 @@
         "name": "make",
         "fieldType": "dropdown",
         "required": true,
-        "options": ["Toyota", "Honda", "Ford", "Chevrolet", "Nissan", "BMW", "Mercedes-Benz", "Audi", "Tesla","Kia","Jaguar-Land-Rover","Mahindra","Koenigsegg","New_Temprory"],
+        "options": ["Toyota", "Honda", "Ford", "Chevrolet", "Nissan", "BMW", "Mercedes-Benz", "Audi", "Tesla","Kia","Jaguar-Land-Rover","Mahindra","Koenigsegg","New_temporary"],
         "column": 1,
         "icon": "FaCar"
       },
