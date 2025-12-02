@@ -1,4 +1,3 @@
-//src/profile/components/Inbox.tsx
 import { useEffect, useState } from 'react'
 import { SendBirdProvider } from '@sendbird/uikit-react';
 import '@sendbird/uikit-react/dist/index.css';
@@ -6,8 +5,6 @@ import { useUser } from '@clerk/clerk-react';
 import { GroupChannelList } from '@sendbird/uikit-react/GroupChannelList';
 import { GroupChannel } from '@sendbird/uikit-react/GroupChannel';
 import Service from '@/Shared/Service';
-
-
 
 function Inbox() {
   const { user } = useUser();
@@ -22,15 +19,42 @@ function Inbox() {
       const id = raw.split('@')[0].replace(/\s+/g, '_');
       setUserId(id);
 
-      // Log for debugging SendBird init issues (will appear in browser console)
-      // Avoid printing secrets here — only surface non-sensitive values.
-
-      // setUserId(user.id);
-
       console.debug('[Inbox] derived userId for SendBird:', id);
-      // Try to create / fetch the user and obtain a user access token from SendBird.
+
+      // Try to create / fetch the user and obtain a user access token from the server helper.
       (async () => {
         try {
+          // Prefer calling the helper server that holds the Admin API token.
+          // Use an env var for the helper URL so devs can override (or proxy /api to it).
+          const helperUrl = import.meta.env.VITE_SB_HELPER_URL ?? 'http://localhost:8080';
+          const serverResp = await fetch(`${helperUrl}/api/sendbird/token`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId: id, nickname: user?.fullName ?? 'Unknown User', profileUrl: user?.imageUrl ?? '' }),
+          });
+
+          if (serverResp.ok) {
+            // If the helper returned JSON, parse it. Use a safe parse to avoid exceptions on empty bodies.
+            let serverData = null;
+            try {
+              serverData = await serverResp.json();
+            } catch {
+              console.warn('[Inbox] helper returned no JSON body');
+            }
+            const tokenFromServer = serverData?.token ?? serverData?.access_token;
+            if (tokenFromServer) {
+              setAccessToken(tokenFromServer);
+              console.debug('[Inbox] obtained SendBird user access token from server (masked):', String(tokenFromServer).slice(0, 8) + '...');
+              return;
+            }
+            console.warn('[Inbox] helper responded OK but did not return token:', serverData);
+          } else {
+            // Non-OK (404/500) — log and fall back to client helper
+            console.warn(`[Inbox] helper server request failed: ${serverResp.status} ${serverResp.statusText}`);
+          }
+
+          // If server did not return a token (e.g., server not running), fall back to the in-browser Service helper.
+          console.warn('[Inbox] falling back to client-side CreateSendBirdUser');
           // Service returns an object that may contain access_token in several shapes.
           const resp = await Service.CreateSendBirdUser(id, user?.fullName ?? 'Unknown User', user?.imageUrl ?? '');
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -46,7 +70,6 @@ function Inbox() {
           console.error('[Inbox] could not obtain SendBird user token:', e);
         }
       })();
-
     }
   }, [user])
 
@@ -60,24 +83,18 @@ function Inbox() {
 
   const sbAppId = import.meta.env.VITE_SENDBIRD_APP_ID;
   if (!sbAppId) {
-
     console.error('[Inbox] Missing VITE_SENDBIRD_APP_ID — SendBird UI will not initialize.');
     return <div className="p-4 text-sm text-red-600">Chat is not configured.</div>;
   }
 
-  // If we don't have a per-user token (session token or legacy access token), don't initialize SendBirdProvider.
+  // If we don't have a per-user token, we log a warning but still try to initialize.
   if (!accessToken) {
-    console.warn('[Inbox] No SendBird token available — chat will not initialize. Ensure session tokens are enabled or create users with issue_access_token:true via Admin API.');
-    return (
-      <div className="p-4 text-sm text-gray-700">
-        Chat unavailable — token issuance not enabled for this SendBird app. For local testing you can create a user via the Admin API with <code>issue_access_token: true</code>, or contact SendBird support to enable session tokens for your app.
-      </div>
-    );
+    console.warn('[Inbox] No SendBird token available — chat will initialize without token. Write access might be restricted.');
   }
 
   return (
     <div className='bg-orange-100 p-0  md:px-4 md:py-2'>
-      <div style={{ width: '100%', height: '100vh' }}>
+      <div style={{ width: '100%', height: '80vh' }}>
         <SendBirdProvider
           appId={sbAppId}
           userId={userId}
@@ -85,14 +102,11 @@ function Inbox() {
           profileUrl={user?.imageUrl ?? "https://res.cloudinary.com/dbcx5bxea/image/upload/v1747459046/alt_user_qoqovf.avif"}
           allowProfileEdit={true}
           accessToken={accessToken}
-
           imageCompression={{
             compressionRate: 0.5,
-            // The default value changed from 1.0 to 0.7 starting in v3.3.3.
             resizingWidth: 200,
             resizingHeight: 200,
           }}
-
         >
           <div className='grid grid-cols-1 lg:flex gap-1 md:gap-2 h-full '>
             {/* Channel List */}
@@ -108,39 +122,18 @@ function Inbox() {
                     setChannelUrl(channel.url); // auto-open the newly created channel
                   }
                 }}
-                channelListQueryParams={
-                  {
-                    includeEmpty: true
-                  }
-                }
+                channelListQueryParams={{
+                  includeEmpty: true
+                }}
                 className='mx-auto'
-
-
               />
-
             </div>
             {/* Channel Message Area */}
             <div className='w-full items-center justify-center  shadow-lg'>
               {channelUrl && <GroupChannel channelUrl={channelUrl} />}
-
             </div>
           </div>
-
-
-
-
-        </SendBirdProvider >
-        {/* 
-      This super smart component serves as a drop-in chat solution
-      
-      For advanced 🚀 customizations, use SendbirdProvider:
-      https://sendbird.com/docs/chat/uikit/v3/react/essentials/sendbirdprovider
-    */}
-        {/* <SendbirdApp
-      appId={import.meta.env.VITE_SENDBIRD_APP_ID}
-      userId={userId}
-      accessToken={import.meta.env.VITE_SENDBIRD_ACCESS_TOKEN} // Optional, but recommended
-    /> */}
+        </SendBirdProvider>
       </div>
     </div>
   )
