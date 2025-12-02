@@ -53,11 +53,13 @@ const CreateSendBirdUser = async (userId: string, nickName: any, profileUrl: str
     const SendBirdApplicationId = import.meta.env.VITE_SENDBIRD_APP_ID;
     const SendBirdApiToken = import.meta.env.VITE_SENDBIRD_API_TOKEN;
 
-    // Helper to issue a user access token for an existing user
+    // Helper to issue a session token for an existing user.
+    // New Sendbird APIs use /v3/users/{user_id}/token which returns { token, expires_at }
+    // Keep compatibility if the older `access_token` field is returned by legacy behaviour.
     const issueTokenForUser = async () => {
         const res = await axios.post(
-            `https://api-${SendBirdApplicationId}.sendbird.com/v3/users/${userId}/issue_access_token`,
-            {},
+            `https://api-${SendBirdApplicationId}.sendbird.com/v3/users/${userId}/token`,
+            { expires_at: 0 }, // 0 = no expiration (optional)
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,16 +67,21 @@ const CreateSendBirdUser = async (userId: string, nickName: any, profileUrl: str
                 },
             }
         );
-        return res.data;
+        return res.data; // shape: { token, expires_at } or legacy { access_token }
     };
 
     // First, try to issue a token directly (fast path).
     try {
         const tokenRes = await issueTokenForUser();
-        return { access_token: tokenRes.access_token };
+        // normalize: prefer token, fall back to access_token for legacy
+        const token = (tokenRes as any)?.token ?? (tokenRes as any)?.access_token;
+        return { access_token: token, token: token };
     } catch (err: any) {
         // If issuing token is not available (404) we fall back to check/create flow.
-        if (!(err?.response && err.response.status === 404)) {
+        // If the endpoint exists but the app isn't allowed to use session tokens, SendBird returns 400.
+        if (err?.response && err.response.status === 400) {
+            console.warn('Session tokens are not enabled for this SendBird app (POST /v3/users/{id}/token returned 400). Falling back to legacy flows.');
+        } else if (!(err?.response && err.response.status === 404)) {
             // For other errors, continue to fallback flow but log for visibility
             console.warn('Issue token attempt failed, falling back to user-create flow:', err?.message ?? err);
         }
@@ -94,7 +101,8 @@ const CreateSendBirdUser = async (userId: string, nickName: any, profileUrl: str
             // Try issuing token again (some apps allow it after a create/ensure step)
             try {
                 const tokenAgain = await issueTokenForUser();
-                return { user: checkUser.data, access_token: tokenAgain.access_token };
+                const token = (tokenAgain as any)?.token ?? (tokenAgain as any)?.access_token;
+                return { user: checkUser.data, access_token: token, token: token };
             } catch (e) {
                 // token issuance not available or failed; return user info and indicate no token
                 console.warn('Token issuance not available after user exists:', (e as any)?.message ?? e);
@@ -120,14 +128,17 @@ const CreateSendBirdUser = async (userId: string, nickName: any, profileUrl: str
                         },
                     }
                 );
-                return { user: createRes.data, access_token: createRes.data.access_token };
+                // createRes may contain legacy access_token or newer token field
+                const createToken = (createRes.data as any)?.token ?? (createRes.data as any)?.access_token;
+                return { user: createRes.data, access_token: createToken, token: createToken };
             } catch (createErr: any) {
                 // If create fails because user already exists (4002), try issuing token again.
                 const errData = createErr?.response?.data;
                 if (errData && (errData.code === 4002 || String(errData.message).toLowerCase().includes('unique') || String(errData.message).toLowerCase().includes('exists'))) {
                     try {
                         const tokenRes = await issueTokenForUser();
-                        return { access_token: tokenRes.access_token };
+                        const token = (tokenRes as any)?.token ?? (tokenRes as any)?.access_token;
+                        return { access_token: token, token: token };
                     } catch (tokenErr: any) {
                         console.error('Create user failed with unique constraint and issuing token also failed:', tokenErr?.message ?? tokenErr);
                         return { error: 'token_unavailable', details: tokenErr?.message ?? tokenErr };

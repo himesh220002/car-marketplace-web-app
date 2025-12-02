@@ -34,10 +34,13 @@ function Inbox() {
           // Service returns an object that may contain access_token in several shapes.
           const resp = await Service.CreateSendBirdUser(id, user?.fullName ?? 'Unknown User', user?.imageUrl ?? '');
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const token = (resp as any)?.access_token ?? (resp as any)?.data?.access_token ?? (resp as any)?.accessToken;
+          const token = (resp as any)?.token ?? (resp as any)?.access_token ?? (resp as any)?.data?.access_token ?? (resp as any)?.accessToken;
           if (token) {
             setAccessToken(token);
             console.debug('[Inbox] obtained SendBird user access token (masked):', String(token).slice(0, 8) + '...');
+          } else {
+            // Helpful debug for missing token cases (do not print secrets)
+            console.warn('[Inbox] CreateSendBirdUser did not return a token. Response shape:', Object.keys(resp || {}));
           }
         } catch (e) {
           console.error('[Inbox] could not obtain SendBird user token:', e);
@@ -60,6 +63,16 @@ function Inbox() {
 
     console.error('[Inbox] Missing VITE_SENDBIRD_APP_ID — SendBird UI will not initialize.');
     return <div className="p-4 text-sm text-red-600">Chat is not configured.</div>;
+  }
+
+  // If we don't have a per-user token (session token or legacy access token), don't initialize SendBirdProvider.
+  if (!accessToken) {
+    console.warn('[Inbox] No SendBird token available — chat will not initialize. Ensure session tokens are enabled or create users with issue_access_token:true via Admin API.');
+    return (
+      <div className="p-4 text-sm text-gray-700">
+        Chat unavailable — token issuance not enabled for this SendBird app. For local testing you can create a user via the Admin API with <code>issue_access_token: true</code>, or contact SendBird support to enable session tokens for your app.
+      </div>
+    );
   }
 
   return (
