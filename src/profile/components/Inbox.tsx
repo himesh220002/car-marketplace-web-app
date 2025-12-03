@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { SendBirdProvider } from '@sendbird/uikit-react';
 import '@sendbird/uikit-react/dist/index.css';
 import { useUser } from '@clerk/clerk-react';
 import { GroupChannelList } from '@sendbird/uikit-react/GroupChannelList';
 import { GroupChannel } from '@sendbird/uikit-react/GroupChannel';
+import { FiArrowLeft } from 'react-icons/fi';
 import Service from '@/Shared/Service';
 
 function Inbox() {
@@ -11,6 +12,9 @@ function Inbox() {
   const [userId, setUserId] = useState<string>();
   const [channelUrl, setChannelUrl] = useState<string>();
   const [accessToken, setAccessToken] = useState<string | undefined>();
+
+  // Track if we're intentionally selecting a channel (vs auto-select from GroupChannelList)
+  const allowSelectionRef = useRef(true);
 
   useEffect(() => {
     if (user) {
@@ -93,8 +97,8 @@ function Inbox() {
   }
 
   return (
-    <div className='bg-orange-100 p-0  md:px-4 md:py-2'>
-      <div style={{ width: '100%', height: '80vh' }}>
+    <div className='bg-gradient-to-br from-gray-100 to-gray-200 p-0 lg:px-4 lg:py-2 rounded-lg'>
+      <div className='h-[70vh] lg:h-[80vh] w-full shadow-lg'>
         <SendBirdProvider
           appId={sbAppId}
           userId={userId}
@@ -108,18 +112,18 @@ function Inbox() {
             resizingHeight: 200,
           }}
         >
-          <div className='grid grid-cols-1 lg:flex gap-1 md:gap-2 h-full '>
-            {/* Channel List */}
-            <div className=' border shadow-lg  '>
+          <div className='grid grid-cols-1 lg:flex gap-1 md:gap-2 h-full'>
+            {/* Channel List - Hidden on mobile when chat is open */}
+            <div className={`border shadow-lg ${channelUrl ? 'hidden lg:block' : 'block'}`}>
               <GroupChannelList
                 onChannelSelect={(channel) => {
-                  if (channel?.url) {
-                    setChannelUrl(channel.url); // safely assign if url exists
+                  if (channel?.url && allowSelectionRef.current) {
+                    setChannelUrl(channel.url);
                   }
                 }}
                 onChannelCreated={(channel) => {
                   if (channel?.url) {
-                    setChannelUrl(channel.url); // auto-open the newly created channel
+                    setChannelUrl(channel.url);
                   }
                 }}
                 channelListQueryParams={{
@@ -128,8 +132,28 @@ function Inbox() {
                 className='mx-auto'
               />
             </div>
-            {/* Channel Message Area */}
-            <div className='w-full items-center justify-center  shadow-lg'>
+            {/* Channel Message Area - Hidden on mobile when no chat selected */}
+            <div className={`w-full items-center justify-center shadow-lg ${channelUrl ? 'block' : 'hidden lg:block'}`}>
+              {/* Back button for mobile */}
+              {channelUrl && (
+                <div className="lg:hidden flex items-center gap-2 p-3 border-b bg-gray-50">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      allowSelectionRef.current = false;
+                      setChannelUrl(undefined);
+                      setTimeout(() => {
+                        allowSelectionRef.current = true;
+                      }, 100);
+                    }}
+                    className="text-blue-600 hover:text-blue-700 p-2 hover:bg-blue-50 rounded-lg transition-colors"
+                    aria-label="Back to channel list"
+                  >
+                    <FiArrowLeft className="w-5 h-5" />
+                  </button>
+                  <span className="text-sm font-semibold">Back to Channels</span>
+                </div>
+              )}
               {channelUrl && <GroupChannel channelUrl={channelUrl} />}
             </div>
           </div>

@@ -120,7 +120,7 @@ const [price, setPrice] = useState<string | undefined>();
     return (
         <React.Fragment>
         <div className='p-2 md:p-5 bg-transparent md:bg-white rounded-md md:rounded-full 
-                     flex-col sm:justify-end md:flex md:flex-row gap-10 px-5 items-center w-[60%] md:w-[600px] lg:w-[820px]'>
+                     flex-col sm:justify-end md:flex md:flex-row gap-10 px-5 items-center w-full md:w-[600px] lg:w-[820px]'>
             <Select onValueChange={(value)=>setCars(value === 'all' ? undefined : value)}>
                 <SelectTrigger className="w-full outline-none md:border-none shadow-none text-lg bg-white mb-1">
                     <SelectValue placeholder="Car" />

@@ -58,8 +58,8 @@ const ChatFloating: React.FC = () => {
   return (
     <div
       ref={elRef}
-      style={{ right: posRef.current.right, bottom: posRef.current.bottom }}
-      className="fixed z-50"
+      style={{ bottom: posRef.current.bottom }}
+      className="fixed z-50 right-2 sm:right-6"
     >
       {/* Floating button */}
       <div
@@ -79,8 +79,10 @@ const ChatFloating: React.FC = () => {
       {/* Chat window */}
       {open && (
         <div
-          className={`mt-2 bg-white rounded-xl shadow-xl overflow-hidden transition-all duration-300 ${maximized ? 'w-[640px] h-[720px]' : 'w-[360px] h-[560px]'
-            }`}
+          className={`mt-2 bg-white rounded-xl shadow-xl overflow-hidden transition-all duration-300 ${maximized
+            ? 'w-[95vw] sm:w-[640px] h-[720px]'
+            : 'w-[95vw] sm:w-[360px] h-[560px]'
+            } max-w-[640px]  mb-2`}
         >
           <SendBirdProvider
             appId={sbAppId}

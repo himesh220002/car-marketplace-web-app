@@ -7,7 +7,7 @@ function Hero() {
     
     return (
         <div className=''>
-            <div className='flex flex-col items-center p-10 py-20 
+            <div className='flex flex-col items-center p-2 sm:p-10 py-20 
                             gap-6 h-[590px] w-full object-cover hero-section-snap scroll-snap-start'
                             style={{ backgroundImage: "url('/digital-art-1.jpg')" ,  backgroundSize: "cover", backgroundPosition: "bottom"}}>
 
@@ -17,7 +17,7 @@ function Hero() {
                 <Search />
 
 
-                <img src='/bmw1.png' alt="BMW car" className='mt-5 w-[180px] z-20 ' />
+                <img src='/bmw1.png' alt="BMW car" className='mt-20 w-[250px] sm:w-[580px] z-20 ' />
 
                 {/* Moving Car (animated below BMW but above bg) */}
                 

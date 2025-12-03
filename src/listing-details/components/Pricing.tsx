@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { MdOutlineLocalOffer } from 'react-icons/md';
 import { Button } from '@/components/ui/button';
 
@@ -12,7 +12,7 @@ function Pricing({ carDetail }: any) {
   };
 
   // Format numbers with commas
-  const formatPrice = (price: number, currency:string) => {
+  const formatPrice = (price: number, currency: string) => {
     if (currency === 'INR') {
       return new Intl.NumberFormat('en-IN').format(price); // 1,00,000
     } else {
@@ -29,12 +29,12 @@ function Pricing({ carDetail }: any) {
   };
 
   return (
-    <div className="p-10 rounded-xl border shadow-md">
+    <div className="p-4 sm:p-10 rounded-xl border shadow-md">
       <h2>Our Price</h2>
       {carDetail ? (
         <div>
           <div className="flex items-center justify-between ">
-          
+
             <h2 className="font-bold text-4xl">{getPrice()}</h2>
             <Button
               variant="outline"

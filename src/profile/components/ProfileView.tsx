@@ -157,21 +157,21 @@ const ProfileView: React.FC = () => {
   // Dynamically load Chart.js + react-chartjs-2 at runtime if available.
   useEffect(() => {
     let mounted = true
-    ;(async () => {
+      ; (async () => {
         try {
-        const [chartJsMod, reactChartMod] = await Promise.all([import('chart.js'), import('react-chartjs-2')])
-        const chartModAny = chartJsMod as any
-        const ChartJS = chartModAny.Chart
-        // register chart components
-        ChartJS.register(chartModAny.CategoryScale, chartModAny.LinearScale, chartModAny.PointElement, chartModAny.LineElement, chartModAny.Tooltip, chartModAny.Legend, chartModAny.Filler)
-        if (!mounted) return
-        const LineComp = (reactChartMod as unknown as { Line: React.ComponentType<unknown> }).Line
-        setChartComp(() => LineComp)
-      } catch (err) {
-        // chart packages not installed or failed to load — leave ChartComp null and show fallback
-        console.warn('Chart.js not available:', err)
-      }
-    })()
+          const [chartJsMod, reactChartMod] = await Promise.all([import('chart.js'), import('react-chartjs-2')])
+          const chartModAny = chartJsMod as any
+          const ChartJS = chartModAny.Chart
+          // register chart components
+          ChartJS.register(chartModAny.CategoryScale, chartModAny.LinearScale, chartModAny.PointElement, chartModAny.LineElement, chartModAny.Tooltip, chartModAny.Legend, chartModAny.Filler)
+          if (!mounted) return
+          const LineComp = (reactChartMod as unknown as { Line: React.ComponentType<unknown> }).Line
+          setChartComp(() => LineComp)
+        } catch (err) {
+          // chart packages not installed or failed to load — leave ChartComp null and show fallback
+          console.warn('Chart.js not available:', err)
+        }
+      })()
     return () => { mounted = false }
   }, [])
 
@@ -189,8 +189,8 @@ const ProfileView: React.FC = () => {
   }, [listings])
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <aside className="col-span-1 bg-white rounded-xl shadow p-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+      <aside className="col-span-1 bg-white rounded-xl shadow p-4 sm:p-6">
         <div className="flex items-center gap-4">
           <img src={(user as unknown as { imageUrl?: string })?.imageUrl ?? '/alt_user.avif'} className="w-20 h-20 rounded-full object-cover" alt="profile" />
           <div>
@@ -217,7 +217,7 @@ const ProfileView: React.FC = () => {
 
         <div className="mt-6">
           <div className="text-sm text-slate-500">Price trend</div>
-    <div className="mt-2 h-72">
+          <div className="mt-2 h-72">
             {priceSeriesNumbers.length ? (
               ChartComp ? (
                 <ChartComp data={chartData as unknown} options={chartOptions as unknown} />
@@ -310,7 +310,7 @@ const ProfileView: React.FC = () => {
       </aside>
 
       <div className="col-span-2">
-        <div className="bg-white rounded-xl shadow p-6 mb-6">
+        <div className="bg-white rounded-xl shadow p-4 sm:p-6 mb-4 sm:mb-6">
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-semibold">Owned Vehicles</h3>
             <div className="text-sm text-slate-500">Showing latest {listings ? listings.length : 0}</div>
@@ -342,7 +342,7 @@ const ProfileView: React.FC = () => {
           )}
         </div>
 
-        <div className="bg-white rounded-xl shadow p-6">
+        <div className="bg-white rounded-xl shadow p-4 sm:p-6">
           <h4 className="text-lg font-semibold">Top Features Across Your Cars</h4>
           <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
             {featuresItems.length ? featuresItems.map(([k, c]) => (

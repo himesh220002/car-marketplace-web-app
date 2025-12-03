@@ -14,7 +14,7 @@ function Profile() {
   return (
     <div>
       <Header />
-      <div className='px-1 md:px-20 my-10'>
+      <div className='px-2 sm:px-4 md:px-10 lg:px-20 my-6 sm:my-8 md:my-10'>
 
         <Tabs defaultValue="my-listing" className="w-full">
           <TabsList className=''>

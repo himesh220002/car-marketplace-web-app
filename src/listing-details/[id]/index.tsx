@@ -1,5 +1,5 @@
 import Header from '@/components/Header'
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import DetailHearder from '../components/DetailHearder'
 import { useParams } from 'react-router-dom'
 import { CarImages, CarListing } from './../../../configs/schema';
@@ -17,20 +17,20 @@ import FinancialCalculator from '../components/FinancialCalculator';
 import MostSearchedCar from '@/components/MostSearchedCar';
 
 type Feature = {
-  label: string;
-  name: string;
-  fieldType: string;
+    label: string;
+    name: string;
+    fieldType: string;
 };
 
 type CarDetailType = {
-  id: number;
-  listingTitle: string;
-  sellingPrice: number;
-  fuelType: string;
-  transmission: string;
-  mileage: number;
-  features?: Feature[];  // <-- Correctly typed features
-  images: { imageUrl: string }[];
+    id: number;
+    listingTitle: string;
+    sellingPrice: number;
+    fuelType: string;
+    transmission: string;
+    mileage: number;
+    features?: Feature[];  // <-- Correctly typed features
+    images: { imageUrl: string }[];
     [key: string]: unknown;
 };
 
@@ -41,7 +41,7 @@ function ListingDetail() {
 
     useEffect(() => {
         // Scroll to top when component mounts
-    window.scrollTo({ top: 0, behavior: 'auto' });
+        window.scrollTo({ top: 0, behavior: 'auto' });
         GetCarDetail();
     }, [id])
 
@@ -51,9 +51,9 @@ function ListingDetail() {
             .where(eq(CarListing.id, Number(id)))
 
         const resp = Service.FormatResult(result);
-        console.log("CarDetails: ",resp);
-        
-    setCarDetail(resp[0] as CarDetailType | undefined);
+        console.log("CarDetails: ", resp);
+
+        setCarDetail(resp[0] as CarDetailType | undefined);
     }
 
     return (
@@ -62,7 +62,7 @@ function ListingDetail() {
 
             {/* Header detail component */}
 
-            <div className='p-10 md:px-20'>
+            <div className='p-2 md:p-4 2xl:p-10 xl:px-20'>
                 <DetailHearder carDetail={carDetail} />
 
 
@@ -70,24 +70,24 @@ function ListingDetail() {
                     {/* Left */}
                     <div className='md:col-span-2'>
                         {/* Image gallary */}
-                            <ImageGallery carDetail={carDetail}/>
+                        <ImageGallery carDetail={carDetail} />
                         {/* Description */}
-                            <Description carDetail={carDetail}/>
+                        <Description carDetail={carDetail} />
                         {/* Features list */}
-                            <Features features={carDetail?.features}/>
+                        <Features features={carDetail?.features} />
                         {/* Financial calculator */}
-                            <FinancialCalculator carDetail={carDetail}/>
+                        <FinancialCalculator carDetail={carDetail} />
 
                     </div>
 
                     {/* Right */}
                     <div >
                         {/* Pricing */}
-                            <Pricing carDetail={carDetail}/>
+                        <Pricing carDetail={carDetail} />
                         {/* Car Specification */}
-                            <Specification carDetail= {carDetail}/>
+                        <Specification carDetail={carDetail} />
                         {/* Owners Details */}
-                            <OwnersDetail carDetail={carDetail}/>
+                        <OwnersDetail carDetail={carDetail} />
                     </div>
                 </div>
                 <MostSearchedCar />

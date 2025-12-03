@@ -1,17 +1,17 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // ✅ Format numbers with commas based on currency
 const formatPrice = (price: number, currency: 'usd' | 'inr') => {
     return new Intl.NumberFormat(currency === 'inr' ? 'en-IN' : 'en-US').format(price)
 }
 
-type Props ={
+type Props = {
     carDetail: any
 }
 
-function FinancialCalculator({ carDetail } : Props) {
+function FinancialCalculator({ carDetail }: Props) {
     const [currency, setCurrency] = useState<'usd' | 'inr'>('usd')
     const exchangeRate = 85 // 1 USD = ₹85
 
@@ -22,12 +22,12 @@ function FinancialCalculator({ carDetail } : Props) {
     const [monthlyPayment, setMonthlyPayment] = useState(0)
 
     useEffect(() => {
-    if (carDetail?.sellingPrice) {
-        setCarPrice(carDetail?.sellingPrice);
-        setDownPayment((carDetail?.sellingPrice)*0.1);
-        setMonthlyPayment(0);
-    }
-}, [carDetail?.id]); 
+        if (carDetail?.sellingPrice) {
+            setCarPrice(carDetail?.sellingPrice);
+            setDownPayment((carDetail?.sellingPrice) * 0.1);
+            setMonthlyPayment(0);
+        }
+    }, [carDetail?.id]);
 
     // 🔁 Currency toggle and live conversion
     const handleCurrencyToggle = () => {
@@ -53,7 +53,7 @@ function FinancialCalculator({ carDetail } : Props) {
     }
 
     return (
-        <div className='p-10 border rounded-xl shadow-md mt-7'>
+        <div className='p-4 sm:p-10 border rounded-xl shadow-md mt-7'>
             <h2 className='font-medium text-2xl'>Financial Calculator</h2>
 
             <div className='flex gap-5 mt-5 items-end'>
@@ -63,7 +63,7 @@ function FinancialCalculator({ carDetail } : Props) {
                             Price ({currency === 'usd' ? '$' : '₹'})
                         </label>
                         <Button size='sm' variant='outline' onClick={handleCurrencyToggle}>
-                           Currency :  {currency === 'usd' ? '$' : '₹'}
+                            Currency :  {currency === 'usd' ? '$' : '₹'}
                         </Button>
                     </div>
                     <Input
