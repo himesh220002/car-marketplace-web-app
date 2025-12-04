@@ -19,30 +19,30 @@ const Condition = [
         id: 5,
         name: "Salvage"
     },
-    
+
 ]
 const Type = [
     {
-        id:1,
-        name:"New"
+        id: 1,
+        name: "New"
     },
     {
-        id:2,
-        name:"Used"
+        id: 2,
+        name: "Used"
     },
     {
-        id:3,
-        name:"Certified Pre-Owned"
+        id: 3,
+        name: "Certified Pre-Owned"
     },
     {
-        id:4,
-        name:"Demo"
+        id: 4,
+        name: "Demo"
     },
     {
-        id:5,
-        name:"Rental"
+        id: 5,
+        name: "Rental"
     },
-    
+
 ]
 const CarMakes = [
     {
@@ -83,7 +83,7 @@ const CarMakes = [
     },
     {
         id: 11,
-        name: "KJaguar-Land-Roveria"
+        name: "Jaguar-Land-Rover"
     },
     {
         id: 12,
@@ -93,12 +93,26 @@ const CarMakes = [
         id: 13,
         name: "Mahindra"
     },
+
     {
         id: 14,
-        name: "Koenigsegg"
+        name: "Tata"
     },
     {
         id: 15,
+        name: "Hyundai"
+    },
+    {
+        id: 16,
+        name: "Suzuki"
+    },
+    
+    {
+        id: 17,
+        name: "Koenigsegg"
+    },
+    {
+        id: 18,
         name: "New_temporary"
     },
 ]
@@ -166,11 +180,11 @@ const Pricing = [
     },
 ]
 
-const Category= [
+const Category = [
     {
         id: 1,
-        name:'SUV',
-        icon:'/suv-car.png'
+        name: 'SUV',
+        icon: '/suv-car.png'
     },
     // {
     //     id: 2,
@@ -179,51 +193,51 @@ const Category= [
     // },
     {
         id: 2,
-        name:'Sedan',
-        icon:'/sedan.png'
+        name: 'Sedan',
+        icon: '/sedan.png'
     },
     {
         id: 3,
-        name:'Hatchback',
-        icon:'/hatchback.png'
+        name: 'Hatchback',
+        icon: '/hatchback.png'
     },
     {
         id: 4,
-        name:'Off-road',
-        icon:'/adventure.png'
+        name: 'Off-road',
+        icon: '/adventure.png'
     },
     {
         id: 5,
-        name:'Electric',
+        name: 'Electric',
         // icon:'/electric-car.png'
-        icon:'/charging-station.png'
+        icon: '/charging-station.png'
     },
     {
         id: 6,
-        name:'Convertible',
-        icon:'/convertible.png'
+        name: 'Convertible',
+        icon: '/convertible.png'
     },
     {
         id: 7,
-        name:'Sports',
-        icon:'/sports-car.png'
+        name: 'Sports',
+        icon: '/sports-car.png'
     },
     {
         id: 8,
-        name:'Hybrid',
-        icon:'/hybrid-car.png'
+        name: 'Hybrid',
+        icon: '/hybrid-car.png'
     },
     {
         id: 9,
-        name:'Van',
-        icon:'/van.png'
+        name: 'Van',
+        icon: '/van.png'
     },
     {
         id: 10,
-        name:'Truck',
-        icon:'/big-truck.png'
+        name: 'Truck',
+        icon: '/big-truck.png'
     },
-    
+
 ]
 
 export default {

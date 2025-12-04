@@ -6,68 +6,68 @@ function Footer() {
 
 
   return (
-    <footer className="bg-gray-100 ">
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+    <footer className="relative bg-gradient-to-b from-slate-100 to-white dark:from-slate-900 dark:to-slate-950 border-t border-slate-200 dark:border-slate-700 overflow-hidden">
+      {/* Gradient Orb */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/10 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-70" />
+
+      <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="flex justify-center text-teal-600">
-          <Link to={"/"} >
-            <img src="/OneCarLogo.png" className="w-[100px] " />
+          <Link to={"/"} className="transform hover:scale-110 transition-transform duration-300">
+            <img src="/OneCarLogo.png" className="w-[100px] drop-shadow-xl" />
           </Link>
 
         </div>
 
-        <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
-          © 2025 One Car. All rights reserved. Drive your dream, buy and sell with confidence.
+        <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-slate-600 dark:text-slate-400">
+          © 2025 <span className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">One Car</span>. All rights reserved.
+          <br />
+          <span className="text-sm">Drive your dream, buy and sell with confidence.</span>
         </p>
 
         <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
           <li className="relative group">
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="/about"> About </a>
-            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+            <a className="text-slate-700 dark:text-slate-300 transition hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text font-medium" href="/about"> About </a>
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
               /about
             </span>
           </li>
 
           <li className="relative group">
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="/careers"> Careers </a>
-            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+            <a className="text-slate-700 dark:text-slate-300 transition hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text font-medium" href="/careers"> Careers </a>
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
               /careers
             </span>
           </li>
 
           <li className="relative group">
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="https://himesh220002.github.io/My-Portfolio/#contact" target="_blank" rel="noopener noreferrer"> Contacts </a>
-            <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
-              https://himesh220002.github.io/My-Portfolio/#contact
+            <a className="text-slate-700 dark:text-slate-300 transition hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text font-medium" href="https://himesh220002.github.io/My-Portfolio/#contact" target="_blank" rel="noopener noreferrer"> Contacts </a>
+            <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+              Portfolio Contact
             </span>
           </li>
 
           <li className="relative group">
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="/services"> Services </a>
-            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+            <a className="text-slate-700 dark:text-slate-300 transition hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text font-medium" href="/services"> Services </a>
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
               /services
             </span>
           </li>
 
           <li className="relative group">
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="https://himesh220002.github.io/My-Portfolio/" target="_blank" rel="noopener noreferrer"> Portfolio </a>
-            <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
-              https://himesh220002.github.io/My-Portfolio/
+            <a className="text-slate-700 dark:text-slate-300 transition hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text font-medium" href="https://himesh220002.github.io/My-Portfolio/" target="_blank" rel="noopener noreferrer"> Portfolio </a>
+            <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+              Developer Portfolio
             </span>
           </li>
-
-          {/* <li>
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Blog </a>
-          </li> */}
         </ul>
 
         <ul className="mt-12 flex justify-center gap-6 md:gap-8">
           <li className="relative group">
-            {/* Placeholder link for Facebook */}
             <a
               href="#"
               rel="noreferrer"
               target="_blank"
-              className="text-gray-700 transition hover:text-gray-700/75"
+              className="text-slate-600 dark:text-slate-400 transition hover:text-blue-600 dark:hover:text-blue-400 transform hover:scale-110 duration-300"
             >
               <span className="sr-only">Facebook</span>
               <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -78,19 +78,17 @@ function Footer() {
                 />
               </svg>
             </a>
-            {/* Tooltip to show link on hover  */}
-            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
               #
             </span>
           </li>
 
           <li className="relative group">
-            {/* Placeholder link for Instagram */}
             <a
               href="#"
               rel="noreferrer"
               target="_blank"
-              className="text-gray-700 transition hover:text-gray-700/75"
+              className="text-slate-600 dark:text-slate-400 transition hover:text-pink-600 dark:hover:text-pink-400 transform hover:scale-110 duration-300"
             >
               <span className="sr-only">Instagram</span>
               <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -101,18 +99,17 @@ function Footer() {
                 />
               </svg>
             </a>
-            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
               #
             </span>
           </li>
 
           <li className="relative group">
-            {/* Placeholder link for Twitter */}
             <a
               href="#"
               rel="noreferrer"
               target="_blank"
-              className="text-gray-700 transition hover:text-gray-700/75"
+              className="text-slate-600 dark:text-slate-400 transition hover:text-sky-600 dark:hover:text-sky-400 transform hover:scale-110 duration-300"
             >
               <span className="sr-only">Twitter</span>
               <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -121,7 +118,7 @@ function Footer() {
                 />
               </svg>
             </a>
-            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
               #
             </span>
           </li>
@@ -131,7 +128,7 @@ function Footer() {
               href="https://github.com/himesh220002/"
               rel="noreferrer"
               target="_blank"
-              className="text-gray-700 transition hover:text-gray-700/75"
+              className="text-slate-600 dark:text-slate-400 transition hover:text-slate-900 dark:hover:text-white transform hover:scale-110 duration-300"
             >
               <span className="sr-only">GitHub</span>
               <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -142,9 +139,8 @@ function Footer() {
                 />
               </svg>
             </a>
-            {/* Tooltip to show link on hover  */}
-            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
-              https://github.com/himesh220002/
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+              GitHub Profile
             </span>
           </li>
 
@@ -153,7 +149,7 @@ function Footer() {
               href="https://himesh220002.github.io/My-Portfolio/"
               rel="noreferrer"
               target="_blank"
-              className="text-gray-700 transition hover:text-gray-700/75"
+              className="text-slate-600 dark:text-slate-400 transition hover:text-purple-600 dark:hover:text-purple-400 transform hover:scale-110 duration-300"
             >
               <span className="sr-only">Portfolio</span>
               <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -164,8 +160,8 @@ function Footer() {
                 />
               </svg>
             </a>
-            <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">
-              https://himesh220002.github.io/My-Portfolio/
+            <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+              Portfolio Website
             </span>
           </li>
         </ul>

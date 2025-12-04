@@ -1,11 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { /*ClerkLoaded,*/ ClerkProvider, /*SignIn, SignUp*/} from '@clerk/clerk-react'
+import { /*ClerkLoaded,*/ ClerkProvider, /*SignIn, SignUp*/ } from '@clerk/clerk-react'
 import './index.css'
 import Home from './home'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Contact  from './contact'
+import Contact from './contact'
 import Profile from './profile'
 import AddListing from './add-listing'
 import { Toaster } from 'sonner'
@@ -15,15 +15,16 @@ import ListingDetail from './listing-details/[id]'
 import ChatFloating from './components/ChatFloating'
 import NewCars from './new'
 import PreOwned from './preowned'
+import AdminPanel from './admin'
 
-const router=createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home/>
+    element: <Home />
   },
   {
     path: '/contact',
-    element: <Contact/>
+    element: <Contact />
   },
   {
     path: '/new',
@@ -42,25 +43,21 @@ const router=createBrowserRouter([
     element: <AddListing />
   },
   {
-    path:'/search',
+    path: '/search',
     element: <SearchByOptions />
   },
   {
-    path: '/search/:category',  // dynamic route
-    element: <SearchByCategory/>
+    path: '/search/:category',
+    element: <SearchByCategory />
   },
   {
-    path: '/listing-details/:id',  // dynamic route
-    element: <ListingDetail/>
+    path: '/listing-details/:id',
+    element: <ListingDetail />
   },
-  // {
-  //   path: '/sign-in',
-  //   element: <SignIn routing="path" path="/sign-in" />
-  // },
-  // {
-  //   path: '/sign-up',
-  //   element: <SignUp routing="path" path="/sign-up" />
-  // }
+  {
+    path: '/admin',
+    element: <AdminPanel />
+  },
 ])
 
 // Import your Publishable Key

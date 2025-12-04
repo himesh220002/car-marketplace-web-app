@@ -79,6 +79,10 @@ function DetailHearder({ carDetail }: props) {
                 return '/Company Logos/teslalogo.png';
             case 'Kia':
                 return '/Company Logos/kialogo.png';
+            case 'Suzuki':
+                return '/Company Logos/suzuki.png';
+            case 'Tata':
+                return '/Company Logos/tatalogo.png';
             case 'Jaguar-Land-Rover':
                 return '/Company Logos/JLRlogo.png';
             case 'Mahindra':

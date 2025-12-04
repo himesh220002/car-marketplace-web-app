@@ -53,17 +53,17 @@ function UploadImages({
   const onFileSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
     if (files.length === 0) return;
-  
+
     const newFiles = files.filter(file => !selectedFileList.includes(file));
-  
+
     console.log("📁 Selected files:");
     newFiles.forEach((file, _index) => {
       console.log(`- ${file.name} (${file.type}, ${file.size} bytes)`);
     });
-  
+
     setSelectedFileList(prev => [...prev, ...newFiles]);
   };
-  
+
 
   const onImageRemove = (image: File, _index: number) => {
     const result = selectedFileList.filter((item) => item !== image);
@@ -81,6 +81,41 @@ function UploadImages({
     }
   };
 
+  const onSetCoverImage = async (index: number) => {
+    if (index === 0) return; // Already cover image
+
+    setLoader(true);
+
+    // Reorder images in state
+    const newImageList = [...editCarImageList];
+    const [coverImage] = newImageList.splice(index, 1);
+    newImageList.unshift(coverImage);
+    setEditCarImageList(newImageList);
+
+    // Save to database - delete all images and reinsert in new order
+    try {
+      const listingId = carInfo?.id;
+      if (!listingId) return;
+
+      // Delete all existing images for this listing
+      await db.delete(CarImages).where(eq(CarImages.CarListingId, listingId));
+
+      // Reinsert images in new order
+      for (const imageUrl of newImageList) {
+        await db.insert(CarImages).values({
+          imageUrl: imageUrl,
+          CarListingId: listingId,
+        });
+      }
+
+      console.log('Cover image updated successfully');
+    } catch (error) {
+      console.error('Error updating cover image:', error);
+    } finally {
+      setLoader(false);
+    }
+  };
+
   const UploadImageToServer = async (listingId: number): Promise<void> => {
     if (selectedFileList.length === 0 || !listingId || isNaN(listingId)) return;
 
@@ -93,7 +128,7 @@ function UploadImages({
     setLoader(true);
 
     const promises = selectedFileList.map(async (file) => {
-        console.log("Uploading files ...");
+      console.log("Uploading files ...");
       const data = new FormData();
       data.append("file", file);
       data.append("upload_preset", "car_marketplace");
@@ -115,7 +150,7 @@ function UploadImages({
         });
 
         setUploadedImageURLs(prev => [...prev, uploadImageURL.secure_url]);
-        
+
       } catch (error) {
         console.error("Error uploading image:", error);
       }
@@ -124,11 +159,11 @@ function UploadImages({
     await Promise.all(promises);
     console.log("files uploaded sucessfully")
 
-    if(!mode){
-        setSelectedFileList([]);
-        console.log("reached !mode");
+    if (!mode) {
+      setSelectedFileList([]);
+      console.log("reached !mode");
     }
-    
+
     setLoader(false);
     navigate('/profile');
   };
@@ -143,19 +178,32 @@ function UploadImages({
         {/* Existing Images (Edit Mode) */}
         {mode === 'edit' &&
           editCarImageList.map((image, index) => (
-            <div key={index} className="relative">
+            <div key={index} className="relative group">
+              {index === 0 && (
+                <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded z-10">
+                  Cover
+                </div>
+              )}
               <IoMdCloseCircle
                 className="absolute top-2 right-2 text-lg text-white cursor-pointer z-10"
                 onClick={() => onImageRemoveFromDB(image, index)}
               />
-              <img src={image} 
-              onError={(e) => {
-                e.currentTarget.src = "/Bad_Req404.png"; // ✅ fallback image (local placeholder)
-                e.currentTarget.classList.add("opacity-70"); // optional style
-                e.currentTarget.alt = "Image failed to load"; // Update alt
-                e.currentTarget.classList.add("opacity-60", "grayscale"); // Optional effect
-              }}
-              className="w-full h-[130px] object-cover rounded-xl" />
+              {index !== 0 && (
+                <button
+                  onClick={() => onSetCoverImage(index)}
+                  className="absolute bottom-2 left-2 right-2 bg-blue-500 text-white text-xs py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                >
+                  Set as Cover
+                </button>
+              )}
+              <img src={image}
+                onError={(e) => {
+                  e.currentTarget.src = "/Bad_Req404.png";
+                  e.currentTarget.classList.add("opacity-70");
+                  e.currentTarget.alt = "Image failed to load";
+                  e.currentTarget.classList.add("opacity-60", "grayscale");
+                }}
+                className="w-full h-[130px] object-cover rounded-xl" />
             </div>
           ))}
 
@@ -167,11 +215,11 @@ function UploadImages({
                 className="absolute top-2 right-2 text-lg text-white cursor-pointer "
                 onClick={() => onImageRemove(image, index)}
               />
-              <img src={URL.createObjectURL(image)} 
-              
-              className="w-full h-[130px] object-cover rounded-xl" 
-              alt={`preview-${index}`}
-            
+              <img src={URL.createObjectURL(image)}
+
+                className="w-full h-[130px] object-cover rounded-xl"
+                alt={`preview-${index}`}
+
               />
             </div>
           ))}

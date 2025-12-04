@@ -189,62 +189,71 @@ const ProfileView: React.FC = () => {
   }, [listings])
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-      <aside className="col-span-1 bg-white rounded-xl shadow p-4 sm:p-6">
-        <div className="flex items-center gap-4">
-          <img src={(user as unknown as { imageUrl?: string })?.imageUrl ?? '/alt_user.avif'} className="w-20 h-20 rounded-full object-cover" alt="profile" />
-          <div>
-            <div className="text-xl font-bold">{user?.fullName ?? user?.primaryEmailAddress?.emailAddress ?? 'Profile'}</div>
-            <div className="text-sm text-slate-500">{isDealer ? 'Dealer' : 'Private Seller'}</div>
-            <div className="mt-2 text-sm text-slate-600">{user?.primaryEmailAddress?.emailAddress}</div>
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 sm:gap-2 md:gap-8">
+      <aside className="col-span-1 space-y-6">
+        {/* User Card */}
+        <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-xl p-4 sm:p-6 border border-slate-100 dark:border-slate-700 relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-blue-600 to-purple-600 opacity-90" />
+          <div className="relative mt-8 flex flex-col items-center">
+            <div className="p-1 bg-white dark:bg-slate-800 rounded-full mb-4">
+              <img src={(user as unknown as { imageUrl?: string })?.imageUrl ?? '/alt_user.avif'} className="w-24 h-24 rounded-full object-cover border-4 border-white dark:border-slate-800 shadow-lg" alt="profile" />
+            </div>
+            <div className="text-2xl font-bold text-slate-900 dark:text-white">{user?.fullName ?? user?.primaryEmailAddress?.emailAddress ?? 'Profile'}</div>
+            <div className="text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full mt-2">
+              {isDealer ? 'Verified Dealer' : 'Private Seller'}
+            </div>
+            <div className="mt-2 text-sm text-slate-500 dark:text-slate-400">{user?.primaryEmailAddress?.emailAddress}</div>
+          </div>
+
+          <div className="mt-8 grid grid-cols-3 gap-2 border-t border-slate-100 dark:border-slate-700 pt-6">
+            <div className="text-center p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Listings</div>
+              <div className="text-xl font-bold text-slate-900 dark:text-white">{stats.count}</div>
+            </div>
+            <div className="text-center p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Avg Price</div>
+              <div className="text-xl font-bold text-slate-900 dark:text-white">{stats.avg ? `$${(stats.avg / 1000).toFixed(1)}k` : '—'}</div>
+            </div>
+            <div className="text-center p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Value</div>
+              <div className="text-xl font-bold text-slate-900 dark:text-white">{stats.total ? `$${(stats.total / 1000).toFixed(1)}k` : '—'}</div>
+            </div>
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-3 gap-3">
-          <div className="text-center">
-            <div className="text-sm text-slate-500">Listings</div>
-            <div className="text-lg font-bold">{stats.count}</div>
+        {/* Price Trend */}
+        <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-6 border border-slate-100 dark:border-slate-700">
+          <div className="flex items-center justify-between mb-4">
+            <div className="font-bold text-lg text-slate-900 dark:text-white">Price Trend</div>
+            <span className="text-xs font-medium text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-lg">Last 12 Listings</span>
           </div>
-          <div className="text-center">
-            <div className="text-sm text-slate-500">Avg Price</div>
-            <div className="text-lg font-bold">{stats.avg ? `$${stats.avg.toLocaleString()}` : '—'}</div>
-          </div>
-          <div className="text-center">
-            <div className="text-sm text-slate-500">Total Value</div>
-            <div className="text-lg font-bold">{stats.total ? `$${stats.total.toLocaleString()}` : '—'}</div>
-          </div>
-        </div>
-
-        <div className="mt-6">
-          <div className="text-sm text-slate-500">Price trend</div>
-          <div className="mt-2 h-72">
+          <div className="h-64">
             {priceSeriesNumbers.length ? (
               ChartComp ? (
                 <ChartComp data={chartData as unknown} options={chartOptions as unknown} />
               ) : (
-                <div className="text-sm text-slate-500">Chart library not installed — run <code>npm i chart.js react-chartjs-2</code></div>
+                <div className="flex items-center justify-center h-full text-sm text-slate-500">Chart library loading...</div>
               )
             ) : (
-              <div className="text-sm text-slate-500">No price history</div>
+              <div className="flex items-center justify-center h-full text-sm text-slate-500">No price history available</div>
             )}
           </div>
         </div>
 
-        <div className="mt-6">
-          <div className="text-sm text-slate-500">Top Makes</div>
-          <div className="mt-2 space-y-2">
+        {/* Top Makes */}
+        <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-6 border border-slate-100 dark:border-slate-700">
+          <div className="font-bold text-lg text-slate-900 dark:text-white mb-4">Top Makes</div>
+          <div className="space-y-4">
             {stats.topMakes.map(([make, count]) => {
               const pct = stats.count ? Math.round((count / stats.count) * 100) : 0
               return (
-                <div key={make} className="flex items-center gap-3">
-                  <div className="flex-1">
-                    <div className="flex justify-between text-sm">
-                      <span className="font-medium">{make}</span>
-                      <span className="text-xs text-slate-500">{count} ({pct}%)</span>
-                    </div>
-                    <div className="h-2 bg-slate-100 rounded-full mt-1 overflow-hidden">
-                      <div className="bg-blue-600 h-2 rounded-full" style={{ width: `${Math.max(4, pct)}%` }} />
-                    </div>
+                <div key={make} className="group">
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="font-medium text-slate-700 dark:text-slate-300">{make}</span>
+                    <span className="text-xs text-slate-500">{count} ({pct}%)</span>
+                  </div>
+                  <div className="h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                    <div className="bg-gradient-to-r from-blue-500 to-purple-500 h-full rounded-full transition-all duration-500 group-hover:opacity-80" style={{ width: `${Math.max(4, pct)}%` }} />
                   </div>
                 </div>
               )
@@ -254,9 +263,9 @@ const ProfileView: React.FC = () => {
         </div>
 
         {/* Upgrade/Repair/Modify estimator */}
-        <div className="mt-6">
-          <div className="text-sm text-slate-500">Estimated Costs (Upgrade / Repair / Modify)</div>
-          <div className="mt-3 text-sm text-slate-700">
+        <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-6 border border-slate-100 dark:border-slate-700">
+          <div className="font-bold text-lg text-slate-900 dark:text-white mb-4">Estimated Costs</div>
+          <div className="text-sm text-slate-700 dark:text-slate-300">
             {(() => {
               if (!listings || listings.length === 0) return <div className="text-slate-500">No listings to estimate.</div>
               // Simple heuristics: base upgrade cost, repair factor from mileage, modification bucket
@@ -276,28 +285,31 @@ const ProfileView: React.FC = () => {
 
               return (
                 <div>
-                  <div className="grid grid-cols-3 gap-3">
-                    <div className="p-2 bg-slate-50 rounded">
-                      <div className="text-xs text-slate-500">Upgrade</div>
-                      <div className="font-semibold">${totalUpgrade.toLocaleString()}</div>
+                  <div className="grid grid-cols-3 gap-3 mb-4">
+                    <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl text-center">
+                      <div className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase">Upgrade</div>
+                      <div className="font-bold text-slate-900 dark:text-white mt-1">${(totalUpgrade / 1000).toFixed(1)}k</div>
                     </div>
-                    <div className="p-2 bg-slate-50 rounded">
-                      <div className="text-xs text-slate-500">Repair</div>
-                      <div className="font-semibold">${totalRepair.toLocaleString()}</div>
+                    <div className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-xl text-center">
+                      <div className="text-xs font-semibold text-orange-600 dark:text-orange-400 uppercase">Repair</div>
+                      <div className="font-bold text-slate-900 dark:text-white mt-1">${(totalRepair / 1000).toFixed(1)}k</div>
                     </div>
-                    <div className="p-2 bg-slate-50 rounded">
-                      <div className="text-xs text-slate-500">Modify</div>
-                      <div className="font-semibold">${totalModify.toLocaleString()}</div>
+                    <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-xl text-center">
+                      <div className="text-xs font-semibold text-purple-600 dark:text-purple-400 uppercase">Modify</div>
+                      <div className="font-bold text-slate-900 dark:text-white mt-1">${(totalModify / 1000).toFixed(1)}k</div>
                     </div>
                   </div>
 
-                  <div className="mt-3">
-                    <div className="text-xs text-slate-500">Per vehicle estimate (sample)</div>
-                    <div className="mt-2 space-y-2 max-h-40 overflow-auto">
+                  <div>
+                    <div className="text-xs font-semibold text-slate-400 uppercase mb-2">Per vehicle breakdown</div>
+                    <div className="space-y-2 max-h-40 overflow-y-auto pr-2 custom-scrollbar">
                       {per.map((p) => (
-                        <div key={p.id} className="flex justify-between text-sm border-b pb-2">
-                          <div className="truncate" style={{ maxWidth: 220 }}>{p.title ?? `#${p.id}`}</div>
-                          <div className="text-slate-600">U:${p.upgrade} R:${p.repair} M:${p.modify}</div>
+                        <div key={p.id} className="flex justify-between items-center text-sm p-2 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors">
+                          <div className="truncate font-medium text-slate-700 dark:text-slate-300 w-1/2">{p.title ?? `#${p.id}`}</div>
+                          <div className="text-xs text-slate-500 flex gap-2">
+                            <span className="text-blue-500">U:${(p.upgrade / 1000).toFixed(1)}k</span>
+                            <span className="text-orange-500">R:${(p.repair / 1000).toFixed(1)}k</span>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -309,64 +321,69 @@ const ProfileView: React.FC = () => {
         </div>
       </aside>
 
-      <div className="col-span-2">
-        <div className="bg-white rounded-xl shadow p-4 sm:p-6 mb-4 sm:mb-6">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xl font-semibold">Owned Vehicles</h3>
-            <div className="text-sm text-slate-500">Showing latest {listings ? listings.length : 0}</div>
-          </div>
-
-          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {listings && listings.length ? listings.slice(0, visibleCount).map((l: Listing) => (
-              <div key={l.id} className="border rounded-2xl overflow-hidden">
-                <CarItem car={l} />
+      <div className="col-span-2 mt-5 sm:mt-0">
+        <div className="col-span-2 space-y-8">
+          <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-xl p-6 md:p-8 border border-slate-100 dark:border-slate-700">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Owned Vehicles</h3>
+              <div className="px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300">
+                {listings ? listings.length : 0} Vehicles
               </div>
-            )) : (
-              Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="h-36 bg-slate-100 rounded-lg animate-pulse" />
-              ))
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-6">
+              {listings && listings.length ? listings.slice(0, visibleCount).map((l: Listing) => (
+                <div key={l.id} className="transform hover:scale-105 transition-transform duration-300">
+                  <CarItem car={l} />
+                </div>
+              )) : (
+                Array.from({ length: 3 }).map((_, i) => (
+                  <div key={i} className="h-48 bg-slate-100 dark:bg-slate-700 rounded-2xl animate-pulse" />
+                ))
+              )}
+            </div>
+
+            {/* Show more button: load 3 more per click */}
+            {listings && listings.length > visibleCount && (
+              <div className="mt-8 flex justify-center">
+                <button
+                  type="button"
+                  className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                  onClick={() => setVisibleCount((v) => Math.min((listings?.length ?? 0), v + 3))}
+                >
+                  Show More Vehicles
+                </button>
+              </div>
             )}
           </div>
 
-          {/* Show more button: load 3 more per click */}
-          {listings && listings.length > visibleCount && (
-            <div className="mt-4 flex justify-center">
-              <button
-                type="button"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                onClick={() => setVisibleCount((v) => Math.min((listings?.length ?? 0), v + 3))}
-              >
-                Show more
-              </button>
+          <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-xl p-6 md:p-8 border border-slate-100 dark:border-slate-700">
+            <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Top Features Across Your Cars</h4>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {featuresItems.length ? featuresItems.map(([k, c]) => (
+                <div key={k} className="p-4 bg-slate-50 dark:bg-slate-700/30 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-800 transition-colors group">
+                  <div className="font-semibold text-slate-800 dark:text-slate-200 mb-1 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{k}</div>
+                  <div className="text-slate-500 dark:text-slate-400 text-xs font-medium">{c} cars equipped</div>
+                </div>
+              )) : <div className="text-sm text-slate-500">No features recorded</div>}
             </div>
-          )}
-        </div>
 
-        <div className="bg-white rounded-xl shadow p-4 sm:p-6">
-          <h4 className="text-lg font-semibold">Top Features Across Your Cars</h4>
-          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
-            {featuresItems.length ? featuresItems.map(([k, c]) => (
-              <div key={k} className="p-3 bg-slate-50 rounded-lg text-sm">
-                <div className="font-medium">{k}</div>
-                <div className="text-slate-500 text-xs">{c} cars</div>
-              </div>
-            )) : <div className="text-sm text-slate-500">No features recorded</div>}
-          </div>
-
-          <div className="mt-6">
-            <h4 className="text-lg font-semibold">Future Upgrade Ideas</h4>
-            <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div className="p-3 border rounded-lg">
-                <div className="font-medium">Battery & Range Optimizer</div>
-                <div className="text-sm text-slate-500">Improved cells & software tuning for EVs.</div>
-              </div>
-              <div className="p-3 border rounded-lg">
-                <div className="font-medium">ADAS Upgrade</div>
-                <div className="text-sm text-slate-500">Enhanced driver assistance modules for safety.</div>
-              </div>
-              <div className="p-3 border rounded-lg">
-                <div className="font-medium">Performance Tune</div>
-                <div className="text-sm text-slate-500">ECU remap, intake/exhaust for sportier feel.</div>
+            <div className="mt-10">
+              <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Future Upgrade Ideas</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  { title: "Battery & Range", desc: "Improved cells & software tuning for EVs.", icon: "🔋", color: "bg-green-50 text-green-600" },
+                  { title: "ADAS Upgrade", desc: "Enhanced driver assistance modules for safety.", icon: "🛡️", color: "bg-blue-50 text-blue-600" },
+                  { title: "Performance Tune", desc: "ECU remap, intake/exhaust for sportier feel.", icon: "🚀", color: "bg-purple-50 text-purple-600" }
+                ].map((item, i) => (
+                  <div key={i} className="p-5 border border-slate-200 dark:border-slate-700 rounded-2xl hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group bg-white dark:bg-slate-800">
+                    <div className={`w-12 h-12 ${item.color} rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform`}>
+                      {item.icon}
+                    </div>
+                    <div className="font-bold text-lg text-slate-900 dark:text-white mb-2">{item.title}</div>
+                    <div className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{item.desc}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

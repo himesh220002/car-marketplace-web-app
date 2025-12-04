@@ -97,8 +97,12 @@ function Inbox() {
   }
 
   return (
-    <div className='bg-gradient-to-br from-gray-100 to-gray-200 p-0 lg:px-4 lg:py-2 rounded-lg'>
-      <div className='h-[70vh] lg:h-[80vh] w-full shadow-lg'>
+    <div className='bg-slate-900/5 backdrop-blur-3xl p-0 lg:p-6 rounded-3xl border border-white/20 shadow-2xl overflow-hidden relative'>
+      {/* Decorative background blobs */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] -z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px] -z-10 pointer-events-none" />
+
+      <div className='h-[75vh] lg:h-[85vh] w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl shadow-inner overflow-hidden border border-white/50 dark:border-slate-700/50'>
         <SendBirdProvider
           appId={sbAppId}
           userId={userId}
@@ -111,10 +115,16 @@ function Inbox() {
             resizingWidth: 200,
             resizingHeight: 200,
           }}
+          colorSet={{
+            '--sendbird-light-primary-100': '#eff6ff',
+            '--sendbird-light-primary-300': '#60a5fa',
+            '--sendbird-light-primary-400': '#3b82f6',
+            '--sendbird-light-primary-500': '#2563eb',
+          }}
         >
-          <div className='grid grid-cols-1 lg:flex gap-1 md:gap-2 h-full'>
+          <div className='grid grid-cols-1 lg:flex gap-0 h-full'>
             {/* Channel List - Hidden on mobile when chat is open */}
-            <div className={`border shadow-lg ${channelUrl ? 'hidden lg:block' : 'block'}`}>
+            <div className={`border-r border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-900/50 ${channelUrl ? 'hidden lg:block' : 'block'} lg:w-[350px] flex-shrink-0`}>
               <GroupChannelList
                 onChannelSelect={(channel) => {
                   if (channel?.url && allowSelectionRef.current) {
@@ -129,14 +139,14 @@ function Inbox() {
                 channelListQueryParams={{
                   includeEmpty: true
                 }}
-                className='mx-auto'
+                className='h-full custom-scrollbar'
               />
             </div>
             {/* Channel Message Area - Hidden on mobile when no chat selected */}
-            <div className={`w-full items-center justify-center shadow-lg ${channelUrl ? 'block' : 'hidden lg:block'}`}>
+            <div className={`flex-1 flex flex-col h-full bg-white/30 dark:bg-slate-900/30 ${channelUrl ? 'block' : 'hidden lg:flex'}`}>
               {/* Back button for mobile */}
               {channelUrl && (
-                <div className="lg:hidden flex items-center gap-2 p-3 border-b bg-gray-50">
+                <div className="lg:hidden flex items-center gap-2 p-4 border-b border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-10">
                   <button
                     type="button"
                     onClick={() => {
@@ -146,15 +156,25 @@ function Inbox() {
                         allowSelectionRef.current = true;
                       }, 100);
                     }}
-                    className="text-blue-600 hover:text-blue-700 p-2 hover:bg-blue-50 rounded-lg transition-colors"
+                    className="text-slate-600 dark:text-slate-300 hover:text-blue-600 p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
                     aria-label="Back to channel list"
                   >
                     <FiArrowLeft className="w-5 h-5" />
                   </button>
-                  <span className="text-sm font-semibold">Back to Channels</span>
+                  <span className="text-sm font-bold text-slate-900 dark:text-white">Back to Messages</span>
                 </div>
               )}
-              {channelUrl && <GroupChannel channelUrl={channelUrl} />}
+
+              {channelUrl ? (
+                <GroupChannel channelUrl={channelUrl} />
+              ) : (
+                <div className="hidden lg:flex flex-col items-center justify-center h-full text-slate-400">
+                  <div className="w-24 h-24 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-4">
+                    <svg className="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                  </div>
+                  <p className="text-lg font-medium">Select a conversation to start chatting</p>
+                </div>
+              )}
             </div>
           </div>
         </SendBirdProvider>

@@ -22,7 +22,7 @@ function Header() {
     <header className="">
       <div className="hoverUnderLine flex justify-between items-center shadow-sm py-2 px-5">
         <Link to="/">
-          <img src="/OneCarLogo.png" width={70} className="mr-20" />
+          <img src="/OneCarLogo.png" width={70} className="mr-2 md:mr-20" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -95,11 +95,13 @@ function Header() {
                     href={item.path}
                     onClick={closeMobileMenu}
                     className={`block px-6 py-3 font-medium transition-colors ${location.pathname === item.path
-                        ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-700'
-                        : 'hover:bg-gray-50'
+                      ? 'bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-700'
+                      : 'hover:bg-gray-50 dark:hover:bg-slate-800'
                       }`}
                   >
-                    {item.name}
+                    <span className={location.pathname === item.path ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-semibold' : 'text-slate-700 dark:text-slate-300'}>
+                      {item.name}
+                    </span>
                   </a>
                 </li>
               ))}
