@@ -81,7 +81,7 @@ function AdminPanel() {
 
     const handleLogout = () => {
         sessionStorage.removeItem('adminAuthenticated')
-        window.location.reload()
+        window.location.href = '/'
     }
 
     return (
