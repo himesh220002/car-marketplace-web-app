@@ -271,7 +271,12 @@ const QualityShowcase = () => {
 
                             ].map((video, index) => (
                                 <CarouselItem key={index}>
-                                    <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 aspect-video">
+                                    <div className="flex items-center gap-2 mb-1 px-1">
+                                        <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 px-3 py-1  rounded-full bg-black/50 backdrop-blur-md text-white text-xs font-medium border border-white/20">
+                                            Live Testing Feed • {video.title}
+                                        </span>
+                                    </div>
+                                    <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 aspect-video">
                                         <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300 pointer-events-none z-10" />
                                         <iframe
                                             ref={(el) => { videoRefs.current[index] = el; return; }}
@@ -281,17 +286,12 @@ const QualityShowcase = () => {
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                             allowFullScreen
                                         />
-                                        <div className="absolute top-4 left-4 z-20 pointer-events-none">
-                                            <span className="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md text-white text-xs font-medium border border-white/20">
-                                                Live Testing Feed • {video.title}
-                                            </span>
-                                        </div>
                                     </div>
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <CarouselPrevious className="left-4 bg-gray-700/10 hover:bg-black border-white/20 hover:text-white text-black backdrop-blur-md cursor-pointer" />
-                        <CarouselNext className="right-4 bg-gray-700/10 hover:bg-black border-white/20 hover:text-white text-blacks backdrop-blur-md cursor-pointer" />
+                        <CarouselPrevious className="absolute left-12 -bottom-12 top-auto translate-y-0 sm:top-auto sm:translate-y-0 sm:left-12 xl:top-1/2 xl:-translate-y-1/2 xl:-left-12 bg-gray-700/10 hover:bg-black border-white/20 hover:text-white text-black backdrop-blur-md cursor-pointer" />
+                        <CarouselNext className="absolute right-12 -bottom-12 top-auto translate-y-0 md:top-auto md:translate-y-0 md:right-12 xl:top-1/2 xl:-translate-y-1/2 xl:-right-12 bg-gray-700/10 hover:bg-black border-white/20 hover:text-white text-black backdrop-blur-md cursor-pointer" />
                     </Carousel>
                 </div>
 
