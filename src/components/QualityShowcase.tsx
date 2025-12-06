@@ -123,7 +123,7 @@ const QualityShowcase = () => {
                 // Make progress reach 1.0 faster (e.g., when element is centered)
                 // Original: currentScroll / scrollRange
                 // New: Map 0.0-0.6 range to 0.0-1.0 to finish earlier
-                let rawProgress = currentScroll / scrollRange;
+                const rawProgress = currentScroll / scrollRange;
 
                 // Boost progress so it finishes when the section is roughly centered
                 // 0.5 is center. We want to be done by then or shortly after.
@@ -265,15 +265,16 @@ const QualityShowcase = () => {
                     <Carousel setApi={setApi} className="w-full relative group">
                         <CarouselContent>
                             {[
+                                { id: "PrqYohBV58o", title: "Top Gear" },
                                 { id: "sM7dhUQLvJQ", title: "Performance Testing" },
                                 { id: "lYI5WF2D59g", title: "Safety Crash Test" },
-                                { id: "PrqYohBV58o", title: "Top Gear" }
+
                             ].map((video, index) => (
                                 <CarouselItem key={index}>
                                     <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 aspect-video">
                                         <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300 pointer-events-none z-10" />
                                         <iframe
-                                            ref={(el) => (videoRefs.current[index] = el)}
+                                            ref={(el) => { videoRefs.current[index] = el; return; }}
                                             className="w-full h-full object-cover"
                                             src={`https://www.youtube.com/embed/${video.id}?autoplay=0&mute=1&loop=1&playlist=${video.id}&controls=1&showinfo=0&rel=0&enablejsapi=1`}
                                             title={video.title}
@@ -332,13 +333,13 @@ const QualityShowcase = () => {
           animation: gradient 3s ease infinite;
         }
 
-        .bg-grid-slate-200\/50 {
+        .bg-grid-slate-200\\/50 {
           background-image: linear-gradient(to right, rgb(226 232 240 / 0.5) 1px, transparent 1px),
                             linear-gradient(to bottom, rgb(226 232 240 / 0.5) 1px, transparent 1px);
           background-size: 4rem 4rem;
         }
 
-        .dark .bg-grid-slate-800\/50 {
+        .dark .bg-grid-slate-800\\/50 {
           background-image: linear-gradient(to right, rgb(30 41 59 / 0.5) 1px, transparent 1px),
                             linear-gradient(to bottom, rgb(30 41 59 / 0.5) 1px, transparent 1px);
           background-size: 4rem 4rem;
