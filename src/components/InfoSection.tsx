@@ -43,7 +43,7 @@ function InfoSection() {
           {/* Content */}
           <div>
             <div className="max-w-lg md:max-w-none">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-r from-slate-800 to-purple-700 bg-clip-text text-transparent">
                 Koenigsegg Agera RS: A Hypercar Beyond Limits
               </h3>
 

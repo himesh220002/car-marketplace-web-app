@@ -33,7 +33,7 @@ function Hero() {
                     <Search />
                 </div>
 
-                <img src='/bmw1.png' alt="BMW car" className='mt-20 md:mt-15 lg:mt-10 w-[250px] md:w-[350px] lg:w-[580px] z-20 drop-shadow-2xl' />
+                <img src='/bmw1.png' alt="BMW car" className='mt-10 md:mt-15 lg:mt-10 w-[250px] md:w-[350px] lg:w-[580px] z-20 drop-shadow-2xl' />
 
                 {/* Moving Car (animated below BMW but above bg) */}
                 <img src="/cpng.png" alt="Animated car illustration" className="hidden sm:block car-slide" />

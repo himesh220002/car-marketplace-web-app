@@ -122,7 +122,7 @@ function Search() {
             <div className='p-4 md:p-5 bg-white/95 backdrop-blur-sm dark:bg-slate-900/95 md:bg-white rounded-2xl md:rounded-full 
                      flex flex-col md:flex-row gap-4 md:gap-10 px-4 md:px-5 items-center w-full md:w-[600px] lg:w-[820px] shadow-xl md:shadow-none border border-white/20 md:border-none'>
 
-                <div className="flex flex-col md:flex-row gap-4 md:gap-10 w-full">
+                <div className="flex flex-col md:flex-row gap-1 md:gap-10 w-full">
                     <Select onValueChange={(value) => setCars(value === 'all' ? undefined : value)}>
                         <SelectTrigger className="w-full outline-none border-none shadow-none text-lg bg-transparent dark:bg-transparent p-0 h-auto focus:ring-0">
                             <SelectValue placeholder="Car" />
@@ -193,7 +193,7 @@ function Search() {
                     </Select>
                 </div>
 
-                <div className="w-full md:w-auto mt-2 md:mt-0">
+                <div className="w-full md:w-auto">
                     <Link to={'/search?cars=' + cars + '&make=' + make + '&price=' + price} className="block w-full">
                         <div className='flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-xl md:rounded-full p-3 md:p-3 transition-all cursor-pointer shadow-lg hover:shadow-blue-500/30 active:scale-95'>
                             <CiSearch className='text-2xl md:text-[28px]' />

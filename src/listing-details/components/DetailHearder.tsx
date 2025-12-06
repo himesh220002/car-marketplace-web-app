@@ -114,7 +114,7 @@ function DetailHearder({ carDetail }: props) {
                 <div>
                     <div className="flex items-centre justify-between gap-3">
 
-                        <div className='flex gap-2 items-center justify-between'>
+                        <div className='flex gap-2 items-start justify-between'>
                             {carDetail?.make && (
 
                                 <img
@@ -124,7 +124,7 @@ function DetailHearder({ carDetail }: props) {
                                 />
                             )}
                             <div>
-                                <h2 className="font-bold text-3xl">{carDetail?.listingTitle}</h2>
+                                <h2 className="font-bold text-xl md:text-3xl">{carDetail?.listingTitle}</h2>
                                 <p className='text-sm'>{carDetail?.tagline}</p>
                             </div>
 

@@ -52,7 +52,7 @@ function SearchByOptions() {
   return (
     <div>
       <Header />
-      <div className="p-16 bg-[url('/wallpapersden.com_sci-fi-cool-landscape-art-2k23_2912x1632.jpg')] bg-cover bg-fixed flex justify-center">
+      <div className="p-6 sm:p-16 bg-[url('/wallpapersden.com_sci-fi-cool-landscape-art-2k23_2912x1632.jpg')] bg-cover bg-fixed flex justify-center">
         <Search />
       </div>
       <div className='p-4 sm:p-10 md:p-20'>

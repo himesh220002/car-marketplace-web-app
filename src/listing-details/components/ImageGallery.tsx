@@ -19,7 +19,7 @@ function ImageGallery({ carDetail }: Props) {
             <div>
                 <img
                     src={carDetail?.images[0]?.imageUrl}
-                    className="w-full h-[300px] md:h-[500px] lg:h-[600px] object-cover rounded-xl"
+                    className="w-full h-[250px] sm:h-[300px] md:h-[500px] lg:h-[600px] object-cover rounded-xl"
                 />
             </div>
         );
@@ -34,7 +34,7 @@ function ImageGallery({ carDetail }: Props) {
                             <img
                                 src={img.imageUrl}
                                 alt={`Car image ${index + 1}`}
-                                className="w-full h-[300px] md:h-[400px] lg:h-[600px] 2xl:h-[600px] object-cover rounded-xl"
+                                className="w-full h-[250px] sm:h-[300px] md:h-[400px] lg:h-[600px] 2xl:h-[600px] object-cover rounded-xl"
                             />
                         </CarouselItem>
                     ))}

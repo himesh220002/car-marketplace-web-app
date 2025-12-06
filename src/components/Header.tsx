@@ -14,19 +14,22 @@ function Header() {
     { name: "Home", path: "/" },
     { name: "New", path: "/new" },
     { name: "Preowned", path: "/preowned" },
+    { name: "Services", path: "/services" },
+    { name: "Contact", path: "/contact" },
+    { name: "About", path: "/about" },
   ];
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
     <header className="">
-      <div className="hoverUnderLine flex justify-between items-center shadow-sm py-2 px-5">
+      <div className="relative hoverUnderLine flex justify-between items-center shadow-sm py-2 px-5">
         <Link to="/">
           <img src="/OneCarLogo.png" width={70} className="mr-2 md:mr-20" />
         </Link>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden md:flex gap-10">
+        {/* Desktop Navigation - Absolutely Centered */}
+        <ul className="hidden md:flex gap-10 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
           {navItems.map((item) => (
             <li key={item.path} className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-blue-700">
               <a href={item.path} className={`relative ${location.pathname === item.path ? "active" : ""}`}>
@@ -37,7 +40,7 @@ function Header() {
         </ul>
 
         {/* Desktop User Section */}
-        <div className="hidden md:flex items-center gap-5">
+        <div className="hidden md:flex items-center gap-5 justify-end min-w-[200px]">
           {isSignedIn ? (
             <>
               <UserButton />
@@ -65,7 +68,7 @@ function Header() {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          className="fixed inset-0 bg-[url('/public/wallpapersden.com_sci-fi-cool-landscape-art-2k23_2912x1632.jpg')] bg-opacity-50 z-40 md:hidden"
           onClick={closeMobileMenu}
         />
       )}

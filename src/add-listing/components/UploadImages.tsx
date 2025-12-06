@@ -185,7 +185,7 @@ function UploadImages({
                 </div>
               )}
               <IoMdCloseCircle
-                className="absolute top-2 right-2 text-lg text-white cursor-pointer z-10"
+                className="absolute top-2 right-2 text-lg bg-red-400 rounded-full text-white cursor-pointer z-10"
                 onClick={() => onImageRemoveFromDB(image, index)}
               />
               {index !== 0 && (
@@ -212,7 +212,7 @@ function UploadImages({
           selectedFileList.map((image, index) => (
             <div key={index} className="relative">
               <IoMdCloseCircle
-                className="absolute top-2 right-2 text-lg text-white cursor-pointer "
+                className="absolute top-2 right-2 text-lg bg-red-400 rounded-full text-white cursor-pointer "
                 onClick={() => onImageRemove(image, index)}
               />
               <img src={URL.createObjectURL(image)}
