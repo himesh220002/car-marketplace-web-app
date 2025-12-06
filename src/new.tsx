@@ -9,6 +9,9 @@ import { SkeletonCarItem } from '@/components/SkeletonCarItem'
 import CarItem from '@/components/CarItem'
 import Footer from './components/Footer'
 
+import BrandShowcase from '@/components/BrandShowcase'
+import StatsSection from '@/components/StatsSection'
+
 const NewCars: React.FC = () => {
   type ListingWithImages = {
     id?: number
@@ -110,6 +113,7 @@ const NewCars: React.FC = () => {
           </div>
         </section>
 
+
         {/* Featured Section */}
         <section className="mb-16">
           <div className="flex items-center justify-between mb-8">
@@ -133,6 +137,17 @@ const NewCars: React.FC = () => {
               ))
             )}
           </div>
+        </section>
+
+
+        {/* Brand Showcase */}
+        <section className="mb-16">
+          <BrandShowcase />
+        </section>
+
+        {/* Stats Section */}
+        <section className="mb-16 rounded-3xl overflow-hidden shadow-lg">
+          <StatsSection />
         </section>
 
         {/* Info Section */}

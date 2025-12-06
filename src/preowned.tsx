@@ -8,6 +8,8 @@ import { eq } from 'drizzle-orm'
 import { SkeletonCarItem } from '@/components/SkeletonCarItem'
 import CarItem from '@/components/CarItem'
 import Footer from './components/Footer'
+import PreOwnedStats from './components/PreOwnedStats'
+import ReviewHighlights from './components/ReviewHighlights'
 
 const TrustBadge: React.FC<{ title: string; subtitle?: string; icon?: React.ReactNode }> = ({ title, subtitle, icon }) => (
   <div className="flex items-start gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all duration-300 group">
@@ -189,6 +191,12 @@ const PreOwned: React.FC = () => {
               ))
             )}
           </div>
+        </section>
+        <section>
+          <ReviewHighlights />
+        </section>
+        <section>
+          <PreOwnedStats />
         </section>
       </main>
       <Footer />

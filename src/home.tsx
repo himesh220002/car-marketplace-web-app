@@ -10,7 +10,6 @@ import Footer from './components/Footer'
 import Category from './components/Category'
 
 
-
 function Home() {
 
   useEffect(() => {
