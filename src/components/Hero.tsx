@@ -9,7 +9,7 @@ function Hero() {
         <div className=''>
             <div className='relative flex flex-col items-center p-2 sm:p-10 py-20 
                             gap-6 h-[590px] w-full object-cover hero-section-snap scroll-snap-start overflow-hidden'
-                style={{ backgroundImage: "url('/digital-art-1.jpg')", backgroundSize: "cover", backgroundPosition: "bottom", backgroundAttachment: "fixed" }}>
+                style={{ backgroundImage: "url('/wallpapersden.com_sci-fi-cool-landscape-art-2k23_2912x1632.jpg')", backgroundSize: "cover", backgroundAttachment: "fixed" }}>
 
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
@@ -25,7 +25,7 @@ function Hero() {
 
                     {/* Main Heading with Gradient */}
                     <h2 className='text-center text-4xl md:text-6xl lg:text-7xl font-bold'>
-                        <span className='bg-gradient-to-r from-blue-600 via-purple-200 to-pink-600 bg-clip-text text-transparent drop-shadow-2xl'>
+                        <span className='bg-gradient-to-r from-blue-200 via-purple-200 to-pink-600 bg-clip-text text-transparent drop-shadow-2xl'>
                             Find Your Dream Car
                         </span>
                     </h2>
@@ -33,7 +33,7 @@ function Hero() {
                     <Search />
                 </div>
 
-                <img src='/bmw1.png' alt="BMW car" className='mt-10 w-[250px] sm:w-[580px] z-20 drop-shadow-2xl' />
+                <img src='/bmw1.png' alt="BMW car" className='mt-20 md:mt-15 lg:mt-10 w-[250px] md:w-[350px] lg:w-[580px] z-20 drop-shadow-2xl' />
 
                 {/* Moving Car (animated below BMW but above bg) */}
                 <img src="/cpng.png" alt="Animated car illustration" className="hidden sm:block car-slide" />

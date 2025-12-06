@@ -119,78 +119,88 @@ function Search() {
 
     return (
         <React.Fragment>
-            <div className='p-2 md:p-5 bg-white dark:bg-slate-800 md:bg-white rounded-md md:rounded-full 
-                     flex-col sm:justify-end md:flex md:flex-row gap-10 px-5 items-center w-full md:w-[600px] lg:w-[820px]'>
-                <Select onValueChange={(value) => setCars(value === 'all' ? undefined : value)}>
-                    <SelectTrigger className="w-full outline-none md:border-none shadow-none text-lg bg-white dark:bg-slate-800 mb-1">
-                        <SelectValue placeholder="Car" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {data.Type.map((type, index) => {
-                            const isDisabled = Array.isArray(availableTypes)
-                                ? !availableTypes.includes(type.name)
-                                : false
-                            return (
-                                <SelectItem key={type.name || index} value={type.name} disabled={isDisabled}>
-                                    {type.name}
-                                </SelectItem>
-                            )
-                        })}
-                        <SelectItem key="all-cars" value="all">All Cars</SelectItem>
+            <div className='p-4 md:p-5 bg-white/95 backdrop-blur-sm dark:bg-slate-900/95 md:bg-white rounded-2xl md:rounded-full 
+                     flex flex-col md:flex-row gap-4 md:gap-10 px-4 md:px-5 items-center w-full md:w-[600px] lg:w-[820px] shadow-xl md:shadow-none border border-white/20 md:border-none'>
 
-                    </SelectContent>
-                </Select>
-                <Separator orientation="vertical" className='hidden md:block' />
-                <Select onValueChange={(value) => setMake(value === 'all' ? undefined : value)}>
-                    <SelectTrigger className="w-full outline-none md:border-none shadow-none text-lg bg-white dark:bg-slate-800 mb-1">
-                        <SelectValue placeholder="Car Makes " />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {data.CarMakes.map((maker, index) => {
-                            const isDisabled = Array.isArray(availableMakes)
-                                ? !availableMakes.includes(maker.name)
-                                : false
-                            return (
-                                <SelectItem key={maker.name || index} value={maker.name} disabled={isDisabled}>
-                                    {maker.name}
-                                </SelectItem>
-                            )
-                        })}
-                        <SelectItem key="all-car-makes" value="all">All Car Makers</SelectItem>
+                <div className="flex flex-col md:flex-row gap-4 md:gap-10 w-full">
+                    <Select onValueChange={(value) => setCars(value === 'all' ? undefined : value)}>
+                        <SelectTrigger className="w-full outline-none border-none shadow-none text-lg bg-transparent dark:bg-transparent p-0 h-auto focus:ring-0">
+                            <SelectValue placeholder="Car" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {data.Type.map((type, index) => {
+                                const isDisabled = Array.isArray(availableTypes)
+                                    ? !availableTypes.includes(type.name)
+                                    : false
+                                return (
+                                    <SelectItem key={type.name || index} value={type.name} disabled={isDisabled}>
+                                        {type.name}
+                                    </SelectItem>
+                                )
+                            })}
+                            <SelectItem key="all-cars" value="all">All Cars</SelectItem>
 
-                    </SelectContent>
-                </Select>
+                        </SelectContent>
+                    </Select>
 
-                <Separator orientation="vertical" className='hidden md:block' />
+                    <Separator orientation="horizontal" className='md:hidden w-full bg-slate-200 dark:bg-slate-700' />
+                    <Separator orientation="vertical" className='hidden md:block h-8' />
 
-                <Select
-                    onOpenChange={(open) => setIsOpen(open)}
-                    onValueChange={(value) => setPrice(value === 'all' ? undefined : value)}>
-                    <SelectTrigger className="w-full outline-none md:border-none shadow-none text-lg bg-white dark:bg-slate-800 mb-1">
-                        <SelectValue placeholder={isOpen ? "Pricing(<=)" : "Pricing"} />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {data.Pricing.map((Price, index) => {
-                            const amt = Price.amount as string
-                            const isDisabled = Array.isArray(availablePrices)
-                                ? !availablePrices.includes(amt)
-                                : false
-                            return (
-                                <SelectItem key={amt || index} value={amt.toString()} disabled={isDisabled}>
-                                    {amt}
-                                </SelectItem>
-                            )
-                        })}
-                        <SelectItem key="all-pricing" value="all">All Pricing</SelectItem>
+                    <Select onValueChange={(value) => setMake(value === 'all' ? undefined : value)}>
+                        <SelectTrigger className="w-full outline-none border-none shadow-none text-lg bg-transparent dark:bg-transparent p-0 h-auto focus:ring-0">
+                            <SelectValue placeholder="Car Makes" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {data.CarMakes.map((maker, index) => {
+                                const isDisabled = Array.isArray(availableMakes)
+                                    ? !availableMakes.includes(maker.name)
+                                    : false
+                                return (
+                                    <SelectItem key={maker.name || index} value={maker.name} disabled={isDisabled}>
+                                        {maker.name}
+                                    </SelectItem>
+                                )
+                            })}
+                            <SelectItem key="all-car-makes" value="all">All Car Makers</SelectItem>
 
-                    </SelectContent>
-                </Select>
+                        </SelectContent>
+                    </Select>
 
-                <Link to={'/search?cars=' + cars + '&make=' + make + '&price=' + price} >
+                    <Separator orientation="horizontal" className='md:hidden w-full bg-slate-200 dark:bg-slate-700' />
+                    <Separator orientation="vertical" className='hidden md:block h-8' />
 
-                    <CiSearch className='text-[50px] bg-blue-700 rounded-full p-3 text-white hover:scale-105 transition-all cursor-pointer ml-auto' />
+                    <Select
+                        onOpenChange={(open) => setIsOpen(open)}
+                        onValueChange={(value) => setPrice(value === 'all' ? undefined : value)}>
+                        <SelectTrigger className="w-full outline-none border-none shadow-none text-lg bg-transparent dark:bg-transparent p-0 h-auto focus:ring-0">
+                            <SelectValue placeholder={isOpen ? "Pricing(<=)" : "Pricing"} />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {data.Pricing.map((Price, index) => {
+                                const amt = Price.amount as string
+                                const isDisabled = Array.isArray(availablePrices)
+                                    ? !availablePrices.includes(amt)
+                                    : false
+                                return (
+                                    <SelectItem key={amt || index} value={amt.toString()} disabled={isDisabled}>
+                                        {amt}
+                                    </SelectItem>
+                                )
+                            })}
+                            <SelectItem key="all-pricing" value="all">All Pricing</SelectItem>
 
-                </Link>
+                        </SelectContent>
+                    </Select>
+                </div>
+
+                <div className="w-full md:w-auto mt-2 md:mt-0">
+                    <Link to={'/search?cars=' + cars + '&make=' + make + '&price=' + price} className="block w-full">
+                        <div className='flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-xl md:rounded-full p-3 md:p-3 transition-all cursor-pointer shadow-lg hover:shadow-blue-500/30 active:scale-95'>
+                            <CiSearch className='text-2xl md:text-[28px]' />
+                            <span className="md:hidden ml-2 font-semibold">Search</span>
+                        </div>
+                    </Link>
+                </div>
 
             </div>
         </React.Fragment>

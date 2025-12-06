@@ -21,7 +21,7 @@ function Category() {
                 </div>
 
                 {/* Category Grid */}
-                <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-4 px-5 md:px-20'>
+                <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-10 gap-4 px-5 md:px-20'>
                     {data.Category.map((category, index) => (
                         <Link key={index} to={'search/' + category.name}>
                             <div className='group relative border-2 border-slate-200 dark:border-slate-700 rounded-2xl p-4 flex flex-col items-center hover:shadow-xl hover:border-transparent transition-all duration-300 bg-white dark:bg-slate-800 cursor-pointer overflow-hidden'>

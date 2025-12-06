@@ -1,5 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { FiCheckCircle, FiShield, FiTool, FiFileText, FiKey, FiSun } from 'react-icons/fi';
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+    type CarouselApi,
+} from "@/components/ui/carousel"
 
 interface ProcessStep {
     icon: React.ReactNode;
@@ -13,6 +21,8 @@ const QualityShowcase = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLDivElement>(null);
+    const [api, setApi] = useState<CarouselApi>()
+    const videoRefs = useRef<(HTMLIFrameElement | null)[]>([])
 
     const processSteps: ProcessStep[] = [
         {
@@ -60,29 +70,74 @@ const QualityShowcase = () => {
     ];
 
     useEffect(() => {
+        if (!api) {
+            return
+        }
+
+        const handleSelect = () => {
+            // Pause all videos when slide changes
+            videoRefs.current.forEach((iframe) => {
+                if (iframe && iframe.contentWindow) {
+                    iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*')
+                }
+            })
+        }
+
+        api.on("select", handleSelect)
+
+        return () => {
+            api.off("select", handleSelect)
+        }
+    }, [api])
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect(); // Only need to trigger once
+                }
+            },
+            { threshold: 0.1 } // Trigger earlier
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
         const handleScroll = () => {
             if (!sectionRef.current) return;
 
-            const rect = sectionRef.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
+            // Use requestAnimationFrame for performance
+            requestAnimationFrame(() => {
+                if (!sectionRef.current) return;
+                const rect = sectionRef.current.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
 
-            // Check if section is visible
-            setIsVisible(rect.top < windowHeight && rect.bottom > 0);
+                // Calculate scroll progress (0 to 1)
+                const scrollStart = rect.top - windowHeight;
+                const scrollEnd = rect.bottom;
+                const scrollRange = scrollEnd - scrollStart;
+                const currentScroll = -scrollStart;
 
-            // Calculate scroll progress (0 to 1)
-            const scrollStart = rect.top - windowHeight;
-            const scrollEnd = rect.bottom;
-            const scrollRange = scrollEnd - scrollStart;
-            const currentScroll = -scrollStart;
+                // Make progress reach 1.0 faster (e.g., when element is centered)
+                // Original: currentScroll / scrollRange
+                // New: Map 0.0-0.6 range to 0.0-1.0 to finish earlier
+                let rawProgress = currentScroll / scrollRange;
 
-            const progress = Math.max(0, Math.min(1, currentScroll / scrollRange));
-            setScrollProgress(progress);
+                // Boost progress so it finishes when the section is roughly centered
+                // 0.5 is center. We want to be done by then or shortly after.
+                const progress = Math.max(0, Math.min(1, rawProgress * 1.5));
+                setScrollProgress(progress);
+            });
         };
 
         window.addEventListener('scroll', handleScroll);
-        handleScroll();
 
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
     return (
@@ -97,7 +152,7 @@ const QualityShowcase = () => {
             <div className="container mx-auto px-4 relative z-10">
                 {/* Header with Enhanced Animation */}
                 <div className="text-center mb-20">
-                    <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         <div className="inline-block mb-4">
                             <span className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-semibold">
                                 Our Commitment to Excellence
@@ -176,7 +231,7 @@ const QualityShowcase = () => {
                 </div>
 
                 {/* Enhanced Stats Section */}
-                <div className={`mt-24 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                <div className={`mt-24 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 p-8 rounded-3xl bg-gradient-to-br from-slate-100 to-white dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700 shadow-2xl">
                         {[
                             { value: "150+", label: "Point Inspection", icon: "✓" },
@@ -203,6 +258,40 @@ const QualityShowcase = () => {
                             </div>
                         ))}
                     </div>
+                </div>
+
+                {/* Embedded Video Carousel Section */}
+                <div className={`mt-16 max-w-4xl mx-auto transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <Carousel setApi={setApi} className="w-full relative group">
+                        <CarouselContent>
+                            {[
+                                { id: "sM7dhUQLvJQ", title: "Performance Testing" },
+                                { id: "lYI5WF2D59g", title: "Safety Crash Test" },
+                                { id: "PrqYohBV58o", title: "Top Gear" }
+                            ].map((video, index) => (
+                                <CarouselItem key={index}>
+                                    <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 aspect-video">
+                                        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300 pointer-events-none z-10" />
+                                        <iframe
+                                            ref={(el) => (videoRefs.current[index] = el)}
+                                            className="w-full h-full object-cover"
+                                            src={`https://www.youtube.com/embed/${video.id}?autoplay=0&mute=1&loop=1&playlist=${video.id}&controls=1&showinfo=0&rel=0&enablejsapi=1`}
+                                            title={video.title}
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        />
+                                        <div className="absolute top-4 left-4 z-20 pointer-events-none">
+                                            <span className="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md text-white text-xs font-medium border border-white/20">
+                                                Live Testing Feed • {video.title}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="left-4 bg-gray-700/10 hover:bg-black border-white/20 hover:text-white text-black backdrop-blur-md cursor-pointer" />
+                        <CarouselNext className="right-4 bg-gray-700/10 hover:bg-black border-white/20 hover:text-white text-blacks backdrop-blur-md cursor-pointer" />
+                    </Carousel>
                 </div>
 
                 {/* Progress Indicator */}

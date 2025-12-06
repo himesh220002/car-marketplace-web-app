@@ -58,7 +58,7 @@ function MostSearchedCar() {
                     <CarouselContent className='p-2'>
                         {carList.sort(() => Math.random() - 0.5) // Random sort kept as per original logic
                             .map((car, index) => ( // index is still available if car.id is not reliable for some reason before FormatResult
-                                <CarouselItem key={car.id || index} className='grid grid-cols-1 md:basis-1/3 lg:basis-1/4'>
+                                <CarouselItem key={car.id || index} className='grid grid-cols-1 md:basis-1/2 lg:basis-1/3 xl:basis-1/4'>
                                     <CarItem car={car} />
                                 </CarouselItem>
 
