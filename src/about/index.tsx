@@ -128,7 +128,7 @@ function About() {
                         />
                         <div className="absolute -bottom-10 -left-10 bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-xl max-w-xs hidden md:block">
                             <p className="font-bold text-lg mb-2">"Trust is our currency."</p>
-                            <p className="text-sm text-slate-500">- Arjun Kapoor, CEO</p>
+                            <p className="text-sm text-slate-500">- Cypher Harley, CEO</p>
                         </div>
                     </div>
                 </div>

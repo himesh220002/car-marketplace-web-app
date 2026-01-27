@@ -159,7 +159,7 @@ function doGet(e) {
                                 </div>
                             </div>
                             <p className="text-slate-600 dark:text-slate-400 text-sm italic">
-                                "The support team was incredibly helpful in guiding me through the financing process." - <span className="font-semibold">Rahul S.</span>
+                                &quot;The support team was incredibly helpful in guiding me through the financing process.&quot; - <span className="font-semibold">Rahul S.</span>
                             </p>
                         </div>
 
@@ -188,7 +188,7 @@ function doGet(e) {
                                     </div>
                                     <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
                                     <p className="text-slate-600 text-center max-w-xs mb-8">
-                                        Thank you for reaching out. We'll get back to you within 24 hours.
+                                        Thank you for reaching out. We&apos;ll get back to you within 24 hours.
                                     </p>
                                     <Button onClick={() => setSubmitted(false)} variant="outline">
                                         Send Another Message
